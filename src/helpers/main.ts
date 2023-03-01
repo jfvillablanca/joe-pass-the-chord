@@ -193,3 +193,27 @@ const BFlat: Note = {
     spelling: "B♭",
     intervalFromCNatural: 10,
 };
+
+const Notes = {
+    C,
+    CSharp,
+    CFlat,
+    D,
+    DSharp,
+    DFlat,
+    E,
+    ESharp,
+    EFlat,
+    F,
+    FSharp,
+    FFlat,
+    G,
+    GSharp,
+    GFlat,
+    A,
+    ASharp,
+    AFlat,
+    B,
+    BSharp,
+    BFlat,
+};
