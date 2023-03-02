@@ -1,5 +1,6 @@
 import { Notes } from "./notes";
 import { Intervals } from "./intervals";
+import { Interval, Note } from "./types";
 
 export { Notes, Intervals };
 function getNoteFromInterval(
