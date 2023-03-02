@@ -17,8 +17,13 @@ function getNoteFromInterval(
         rawInterval >= 0 ? rawInterval % 12 : (rawInterval % 12) + 12;
 
     const enharmonics: Note[] = Object.values(Notes).filter((note: Note) => {
-        if (note.intervalFromCNatural === normalizedInterval) {
-            return note;
+        if (normalizedInterval === 0 || normalizedInterval === 12) {
+            return (
+                note.intervalFromCNatural === 0 ||
+                note.intervalFromCNatural === 12
+            );
+        } else {
+            return note.intervalFromCNatural === normalizedInterval;
         }
     });
 
