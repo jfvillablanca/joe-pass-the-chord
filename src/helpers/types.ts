@@ -192,14 +192,17 @@ type CompoundSpicyQualityNameShort =
     | "A14";
 
 type Quality = { name: QualityName; shortName: QualityNameShort };
+
 type SpicyQuality = {
     name: SpicyQualityName;
     shortName: SpicyQualityNameShort;
 };
+
 type CompoundQuality = {
     name: CompoundQualityName;
     shortName: CompoundQualityNameShort;
 };
+
 type CompoundSpicyQuality = {
     name: CompoundSpicyQualityName;
     shortName: CompoundSpicyQualityNameShort;
