@@ -7,8 +7,7 @@ function getNoteFromInterval(
     refNote: Note,
     interval: Interval,
     direction: "ascending" | "descending"
-): Note {
-
+): Note[] {
     const normalizedInterval =
         direction === "ascending"
             ? (refNote.intervalFromCNatural + interval.semitoneDistance) % 12
@@ -21,5 +20,5 @@ function getNoteFromInterval(
     });
 
 
-    return enharmonics[0];
+    return enharmonics;
 }
