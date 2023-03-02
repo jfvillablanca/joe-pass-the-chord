@@ -1,105 +1,69 @@
 import { describe, test, expect } from "vitest";
-import { getEnharmonicsFromInterval, Notes, Intervals } from "../helpers/main";
+import {
+    getEnharmonicsFromInterval,
+    Notes as N,
+    Intervals as I,
+} from "../helpers/main";
 
 describe("Interval tests", () => {
     test("returns a correct note when interval is ascending", () => {
         expect(
-            getEnharmonicsFromInterval(
-                Notes.C,
-                Intervals.majorSixth,
-                "ascending"
-            )
-        ).toContain(Notes.A);
+            getEnharmonicsFromInterval(N.C, I.majorSixth, "ascending")
+        ).toContain(N.A);
     });
 
     test("returns a correct note for ascending intervals involving sharps", () => {
         expect(
-            getEnharmonicsFromInterval(
-                Notes.C,
-                Intervals.minorSecond,
-                "ascending"
-            )
-        ).toContain(Notes.CSharp);
+            getEnharmonicsFromInterval(N.C, I.minorSecond, "ascending")
+        ).toContain(N.CSharp);
 
         expect(
-            getEnharmonicsFromInterval(
-                Notes.ASharp,
-                Intervals.majorSecond,
-                "ascending"
-            )
-        ).toContain(Notes.BSharp);
+            getEnharmonicsFromInterval(N.ASharp, I.majorSecond, "ascending")
+        ).toContain(N.BSharp);
 
         expect(
-            getEnharmonicsFromInterval(
-                Notes.G,
-                Intervals.majorSeventh,
-                "ascending"
-            )
-        ).toContain(Notes.FSharp);
+            getEnharmonicsFromInterval(N.G, I.majorSeventh, "ascending")
+        ).toContain(N.FSharp);
 
         expect(
-            getEnharmonicsFromInterval(
-                Notes.FSharp,
-                Intervals.perfectFifth,
-                "ascending"
-            )
-        ).toContain(Notes.CSharp);
+            getEnharmonicsFromInterval(N.FSharp, I.perfectFifth, "ascending")
+        ).toContain(N.CSharp);
     });
 
     test("returns a correct note for ascending intervals involving flat", () => {
         expect(
-            getEnharmonicsFromInterval(
-                Notes.EFlat,
-                Intervals.perfectOctave,
-                "ascending"
-            )
-        ).toContain(Notes.EFlat);
+            getEnharmonicsFromInterval(N.EFlat, I.perfectOctave, "ascending")
+        ).toContain(N.EFlat);
 
         expect(
-            getEnharmonicsFromInterval(
-                Notes.GFlat,
-                Intervals.perfectFifth,
-                "ascending"
-            )
-        ).toContain(Notes.DFlat);
+            getEnharmonicsFromInterval(N.GFlat, I.perfectFifth, "ascending")
+        ).toContain(N.DFlat);
     });
 
     test("returns the correct note when interval is descending", () => {
         expect(
-            getEnharmonicsFromInterval(
-                Notes.D,
-                Intervals.majorSecond,
-                "descending"
-            )
-        ).toContain(Notes.C);
+            getEnharmonicsFromInterval(N.D, I.majorSecond, "descending")
+        ).toContain(N.C);
 
         expect(
-            getEnharmonicsFromInterval(
-                Notes.C,
-                Intervals.minorThird,
-                "descending"
-            )
-        ).toContain(Notes.A);
+            getEnharmonicsFromInterval(N.C, I.minorThird, "descending")
+        ).toContain(N.A);
     });
 
     test("returns a correct note for descending intervals involving sharps", () => {
         expect(
-            getEnharmonicsFromInterval(
-                Notes.FSharp,
-                Intervals.perfectFifth,
-                "descending"
-            )
-        ).toContain(Notes.B);
+            getEnharmonicsFromInterval(N.FSharp, I.perfectFifth, "descending")
+        ).toContain(N.B);
     });
 
     test("returns a correct note for descending intervals involving flats", () => {
         expect(
             getEnharmonicsFromInterval(
-                Notes.GFlat,
-                Intervals.tritoneDiminished,
+                N.GFlat,
+                I.tritoneDiminished,
                 "descending"
             )
-        ).toContain(Notes.C);
+        ).toContain(N.C);
     });
 });
 
