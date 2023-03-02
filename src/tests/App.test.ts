@@ -6,7 +6,9 @@ describe("Interval tests", () => {
         expect(
             getNoteFromInterval(Notes.C, Intervals.majorSixth, "ascending")
         ).toBe(Notes.A);
+    });
 
+    test("returns the proper enharmonic spelling for sharps", () => {
         expect(
             getNoteFromInterval(
                 Notes.ASharp,
@@ -14,6 +16,7 @@ describe("Interval tests", () => {
                 "ascending"
             )
         ).toBe(Notes.BSharp);
+    });
 
     });
 
