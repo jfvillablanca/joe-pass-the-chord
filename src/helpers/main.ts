@@ -1,5 +1,6 @@
 import { Notes } from "./notes";
 import { Intervals } from "./intervals";
+import { Scale } from "./scales";
 import { Interval, Note } from "./types";
 
 function getEnharmonicsFromInterval(
@@ -29,4 +30,8 @@ function getEnharmonicsFromInterval(
     return enharmonics;
 }
 
-export { Notes, Intervals, getEnharmonicsFromInterval };
+function getScaleTones(tonic: Note, scale: Interval[]): Note[] {
+    return [];
+}
+
+export { Notes, Scale, Intervals, getEnharmonicsFromInterval, getScaleTones };

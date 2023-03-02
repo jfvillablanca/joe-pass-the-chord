@@ -1,8 +1,10 @@
 import { describe, test, expect } from "vitest";
 import {
+    getScaleTones,
     getEnharmonicsFromInterval,
     Notes as N,
     Intervals as I,
+    Scale as S,
 } from "../helpers/main";
 
 describe("Interval tests", () => {
