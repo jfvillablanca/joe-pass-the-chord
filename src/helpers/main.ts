@@ -8,9 +8,9 @@ function getNoteFromInterval(
     direction: "ascending" | "descending"
 ): Note {
     const ascendingInterval =
-        (refNote.intervalFromCNatural + interval.semitoneDistance) % 12;
+        (refNote.intervalFromCNatural + interval.semitoneDistance) % 13;
     const descendingInterval =
-        (refNote.intervalFromCNatural - interval.semitoneDistance) % 12;
+        (refNote.intervalFromCNatural - interval.semitoneDistance) % 13;
 
     const [intervalNote]: Note[] = Object.values(Notes).filter((note: Note) => {
         if (
