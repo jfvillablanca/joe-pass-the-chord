@@ -20,6 +20,18 @@ describe("Interval tests", () => {
                 "ascending"
             )
         ).toContain(Notes.BSharp);
+
+        expect(
+            getNoteFromInterval(Notes.G, Intervals.majorSeventh, "ascending")
+        ).toContain(Notes.FSharp);
+
+        expect(
+            getNoteFromInterval(
+                Notes.FSharp,
+                Intervals.perfectFifth,
+                "ascending"
+            )
+        ).toContain(Notes.CSharp);
     });
 
     test("returns a correct note for ascending intervals involving flat", () => {
@@ -30,6 +42,14 @@ describe("Interval tests", () => {
                 "ascending"
             )
         ).toContain(Notes.EFlat);
+
+        expect(
+            getNoteFromInterval(
+                Notes.GFlat,
+                Intervals.perfectFifth,
+                "ascending"
+            )
+        ).toContain(Notes.DFlat);
     });
 
     test("returns the correct note when interval is descending", () => {
@@ -40,6 +60,26 @@ describe("Interval tests", () => {
         expect(
             getNoteFromInterval(Notes.C, Intervals.minorThird, "descending")
         ).toContain(Notes.A);
+    });
+
+    test("returns a correct note for descending intervals involving sharps", () => {
+        expect(
+            getNoteFromInterval(
+                Notes.FSharp,
+                Intervals.perfectFifth,
+                "descending"
+            )
+        ).toContain(Notes.B);
+    });
+
+    test("returns a correct note for descending intervals involving flats", () => {
+        expect(
+            getNoteFromInterval(
+                Notes.GFlat,
+                Intervals.tritoneDiminished,
+                "descending"
+            )
+        ).toContain(Notes.C);
     });
 });
 
