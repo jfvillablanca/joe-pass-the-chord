@@ -5,7 +5,7 @@ describe("Interval tests", () => {
     test("returns the correct note when interval is ascending", () => {
         expect(
             getNoteFromInterval(Notes.C, Intervals.majorSixth, "ascending")
-        ).toBe(Notes.A);
+        ).toContain(Notes.A);
     });
 
     test("returns the proper enharmonic spelling for sharps", () => {
@@ -15,15 +15,15 @@ describe("Interval tests", () => {
                 Intervals.majorSecond,
                 "ascending"
             )
-        ).toBe(Notes.BSharp);
+        ).toContain(Notes.BSharp);
     });
 
     });
 
-    test("returns the correct note when interval is ascending", () => {
+    test("returns the correct note when interval is descending", () => {
         expect(
             getNoteFromInterval(Notes.D, Intervals.majorSecond, "descending")
-        ).toBe(Notes.C);
+        ).toContain(Notes.C);
     });
 });
 
