@@ -12,7 +12,7 @@ function getNoteFromInterval(
     const normalizedInterval =
         direction === "ascending"
             ? (refNote.intervalFromCNatural + interval.semitoneDistance) % 12
-            : -(refNote.intervalFromCNatural + interval.semitoneDistance) % 12;
+            : -(refNote.intervalFromCNatural - interval.semitoneDistance) % 12;
 
     const enharmonics: Note[] = Object.values(Notes).filter((note: Note) => {
         if (note.intervalFromCNatural === normalizedInterval) {
