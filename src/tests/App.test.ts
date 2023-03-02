@@ -1,20 +1,28 @@
 import { describe, test, expect } from "vitest";
-import { getNoteFromInterval, Notes, Intervals } from "../helpers/main";
+import { getEnharmonicsFromInterval, Notes, Intervals } from "../helpers/main";
 
 describe("Interval tests", () => {
     test("returns a correct note when interval is ascending", () => {
         expect(
-            getNoteFromInterval(Notes.C, Intervals.majorSixth, "ascending")
+            getEnharmonicsFromInterval(
+                Notes.C,
+                Intervals.majorSixth,
+                "ascending"
+            )
         ).toContain(Notes.A);
     });
 
     test("returns a correct note for ascending intervals involving sharps", () => {
         expect(
-            getNoteFromInterval(Notes.C, Intervals.minorSecond, "ascending")
+            getEnharmonicsFromInterval(
+                Notes.C,
+                Intervals.minorSecond,
+                "ascending"
+            )
         ).toContain(Notes.CSharp);
 
         expect(
-            getNoteFromInterval(
+            getEnharmonicsFromInterval(
                 Notes.ASharp,
                 Intervals.majorSecond,
                 "ascending"
@@ -22,11 +30,15 @@ describe("Interval tests", () => {
         ).toContain(Notes.BSharp);
 
         expect(
-            getNoteFromInterval(Notes.G, Intervals.majorSeventh, "ascending")
+            getEnharmonicsFromInterval(
+                Notes.G,
+                Intervals.majorSeventh,
+                "ascending"
+            )
         ).toContain(Notes.FSharp);
 
         expect(
-            getNoteFromInterval(
+            getEnharmonicsFromInterval(
                 Notes.FSharp,
                 Intervals.perfectFifth,
                 "ascending"
@@ -36,7 +48,7 @@ describe("Interval tests", () => {
 
     test("returns a correct note for ascending intervals involving flat", () => {
         expect(
-            getNoteFromInterval(
+            getEnharmonicsFromInterval(
                 Notes.EFlat,
                 Intervals.perfectOctave,
                 "ascending"
@@ -44,7 +56,7 @@ describe("Interval tests", () => {
         ).toContain(Notes.EFlat);
 
         expect(
-            getNoteFromInterval(
+            getEnharmonicsFromInterval(
                 Notes.GFlat,
                 Intervals.perfectFifth,
                 "ascending"
@@ -54,17 +66,25 @@ describe("Interval tests", () => {
 
     test("returns the correct note when interval is descending", () => {
         expect(
-            getNoteFromInterval(Notes.D, Intervals.majorSecond, "descending")
+            getEnharmonicsFromInterval(
+                Notes.D,
+                Intervals.majorSecond,
+                "descending"
+            )
         ).toContain(Notes.C);
 
         expect(
-            getNoteFromInterval(Notes.C, Intervals.minorThird, "descending")
+            getEnharmonicsFromInterval(
+                Notes.C,
+                Intervals.minorThird,
+                "descending"
+            )
         ).toContain(Notes.A);
     });
 
     test("returns a correct note for descending intervals involving sharps", () => {
         expect(
-            getNoteFromInterval(
+            getEnharmonicsFromInterval(
                 Notes.FSharp,
                 Intervals.perfectFifth,
                 "descending"
@@ -74,7 +94,7 @@ describe("Interval tests", () => {
 
     test("returns a correct note for descending intervals involving flats", () => {
         expect(
-            getNoteFromInterval(
+            getEnharmonicsFromInterval(
                 Notes.GFlat,
                 Intervals.tritoneDiminished,
                 "descending"

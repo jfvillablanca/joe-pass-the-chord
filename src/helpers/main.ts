@@ -2,7 +2,7 @@ import { Notes } from "./notes";
 import { Intervals } from "./intervals";
 import { Interval, Note } from "./types";
 
-function getNoteFromInterval(
+function getEnharmonicsFromInterval(
     refNote: Note,
     interval: Interval,
     direction: "ascending" | "descending"
@@ -29,4 +29,4 @@ function getNoteFromInterval(
     return enharmonics;
 }
 
-export { Notes, Intervals, getNoteFromInterval };
+export { Notes, Intervals, getEnharmonicsFromInterval };
