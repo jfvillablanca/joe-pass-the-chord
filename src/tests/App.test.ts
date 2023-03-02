@@ -10,8 +10,12 @@ describe("Interval tests", () => {
         ).toBe(Notes.A);
 
     });
+
+    test("returns the correct note when interval is ascending", () => {
+        expect(
+            getNoteFromInterval(Notes.D, Intervals.majorSecond, "descending")
+        ).toBe(Notes.C);
+    });
 });
 
-describe.todo("Scale tests", () => {
-
-})
+describe.todo("Scale tests", () => {});
