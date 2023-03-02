@@ -7,20 +7,22 @@ function getNoteFromInterval(
     interval: Interval,
     direction: "ascending" | "descending"
 ): Note {
-    const absInterval = refNote.intervalFromCNatural;
-    const relativeInterval = interval.semitoneDistance;
+    const ascendingInterval =
+        (refNote.intervalFromCNatural + interval.semitoneDistance) % 12;
+    const descendingInterval =
+        (refNote.intervalFromCNatural - interval.semitoneDistance) % 12;
 
     const [intervalNote]: Note[] = Object.values(Notes).filter((note: Note) => {
         if (
             direction === "ascending" &&
-            note.intervalFromCNatural === absInterval + relativeInterval
+            note.intervalFromCNatural === ascendingInterval
         ) {
             return note;
         }
 
         if (
             direction === "descending" &&
-            note.intervalFromCNatural === absInterval - relativeInterval
+            note.intervalFromCNatural === descendingInterval
         ) {
             return note;
         }
