@@ -2,13 +2,13 @@ import { describe, test, expect } from "vitest";
 import { getNoteFromInterval, Notes, Intervals } from "../helpers/main";
 
 describe("Interval tests", () => {
-    test("returns the correct note when interval is ascending", () => {
+    test("returns a correct note when interval is ascending", () => {
         expect(
             getNoteFromInterval(Notes.C, Intervals.majorSixth, "ascending")
         ).toContain(Notes.A);
     });
 
-    test("returns the proper enharmonic spelling for sharps", () => {
+    test("returns a correct note for ascending intervals involving sharps", () => {
         expect(
             getNoteFromInterval(Notes.C, Intervals.minorSecond, "ascending")
         ).toContain(Notes.CSharp);
@@ -22,7 +22,7 @@ describe("Interval tests", () => {
         ).toContain(Notes.BSharp);
     });
 
-    test("returns the proper enharmonic spelling for flats", () => {
+    test("returns a correct note for ascending intervals involving flat", () => {
         expect(
             getNoteFromInterval(
                 Notes.EFlat,
