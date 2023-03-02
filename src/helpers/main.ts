@@ -2,7 +2,6 @@ import { Notes } from "./notes";
 import { Intervals } from "./intervals";
 import { Interval, Note } from "./types";
 
-export { Notes, Intervals };
 function getNoteFromInterval(
     refNote: Note,
     interval: Interval,
@@ -27,6 +26,7 @@ function getNoteFromInterval(
         }
     });
 
-
     return enharmonics;
 }
+
+export { Notes, Intervals, getNoteFromInterval };
