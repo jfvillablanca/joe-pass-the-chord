@@ -69,4 +69,9 @@ describe("Interval tests", () => {
     });
 });
 
-describe.todo("Scale tests", () => {});
+describe("Scale tests", () => {
+    test("returns the notes of the Ionian mode", () => {
+        const ionianMode = [N.C, N.D, N.E, N.F, N.G, N.A, N.B];
+        expect(getScaleTones(N.C, S.Ionian)).toBe(ionianMode);
+    });
+});
