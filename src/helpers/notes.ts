@@ -1,4 +1,4 @@
-import { Note } from "./types"
+import { Note } from "./types";
 
 const C: Note = {
     name: "C",
@@ -150,4 +150,4 @@ const Notes = {
     BFlat,
 };
 
-export { Notes }
+export { Notes };
