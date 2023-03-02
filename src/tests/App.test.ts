@@ -39,7 +39,7 @@ describe("Interval tests", () => {
 
         expect(
             getNoteFromInterval(Notes.C, Intervals.minorThird, "descending")
-        ).toContain(Notes.E);
+        ).toContain(Notes.A);
     });
 });
 
