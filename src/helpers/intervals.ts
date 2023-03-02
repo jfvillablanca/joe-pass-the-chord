@@ -1,4 +1,4 @@
-import { Interval } from "./types"
+import { Interval } from "./types";
 
 const perfectUnison: Interval = {
     semitoneDistance: 0,
@@ -128,3 +128,5 @@ const Intervals = {
     majorSeventh,
     perfectOctave,
 };
+
+export { Intervals };
