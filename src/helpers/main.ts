@@ -8,10 +8,13 @@ function getNoteFromInterval(
     interval: Interval,
     direction: "ascending" | "descending"
 ): Note[] {
-    const normalizedInterval =
+    const rawInterval =
         direction === "ascending"
-            ? (refNote.intervalFromCNatural + interval.semitoneDistance) % 12
-            : -(refNote.intervalFromCNatural - interval.semitoneDistance) % 12;
+            ? refNote.intervalFromCNatural + interval.semitoneDistance
+            : refNote.intervalFromCNatural - interval.semitoneDistance;
+
+    const normalizedInterval =
+        rawInterval >= 0 ? rawInterval % 12 : (rawInterval % 12) + 12;
 
     const enharmonics: Note[] = Object.values(Notes).filter((note: Note) => {
         if (note.intervalFromCNatural === normalizedInterval) {
