@@ -5,6 +5,7 @@ import {
     Notes as N,
     Intervals as I,
     Scale as S,
+    getInterval,
 } from "../helpers/main";
 
 describe("Interval tests", () => {
@@ -66,6 +67,13 @@ describe("Interval tests", () => {
                 "descending"
             )
         ).toContain(N.C);
+    });
+
+    test("returns the correct when higher note has higher distance from C natural", () => {
+        const hiNote = N.D;
+        const loNote = N.C;
+
+        expect(getInterval(loNote, hiNote)).toBe(I.majorSecond);
     });
 });
 
