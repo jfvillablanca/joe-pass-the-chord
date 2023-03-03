@@ -30,8 +30,20 @@ function getEnharmonicsFromInterval(
     return enharmonics;
 }
 
-function getScaleTones(tonic: Note, scale: Interval[]): Note[] {
-    return [];
+function getScaleTones(tonic: Note, scale: Interval[]): (Note | undefined)[] {
+    const isValidScaleDegree = createScaleDegreeValidator(tonic);
+
+    return scale.map((degree) => {
+        if (degree === Intervals.perfectUnison) {
+            return tonic;
+        }
+
+        return getEnharmonicsFromInterval(tonic, degree, "ascending").find(
+            (note) => {
+                return isValidScaleDegree(note);
+            }
+        );
+    });
 }
 
 function createScaleDegreeValidator(
