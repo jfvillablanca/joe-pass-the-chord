@@ -53,7 +53,7 @@ function getScaleTones(tonic: Note, scale: Interval[]): (Note | undefined)[] {
             (note) => {
                 return isValidScaleDegree(note);
             }
-        );
+        ) as Note;
     });
 }
 
