@@ -70,8 +70,9 @@ describe("Interval tests", () => {
 });
 
 describe("Scale tests", () => {
-    test("returns the notes of the Ionian mode", () => {
+    test("returns the notes of the Ionian mode in the key of C", () => {
         const ionianMode = [N.C, N.D, N.E, N.F, N.G, N.A, N.B];
-        expect(getScaleTones(N.C, S.Ionian)).toBe(ionianMode);
+        expect(getScaleTones(N.C, S.Ionian)).toStrictEqual(ionianMode);
     });
+
 });
