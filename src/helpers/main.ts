@@ -1,6 +1,6 @@
 import { Notes } from "./notes";
 import { Intervals } from "./intervals";
-import { Scale } from "./scales";
+import { Scale, validKeySignatures } from "./scales";
 import { Interval, Note } from "./types";
 
 function getEnharmonicsFromInterval(
@@ -41,7 +41,7 @@ function getEnharmonicEquivalent(refNote: Note): Note {
     return enharmonicEquivalent ?? enharmonics[0];
 }
 
-function getScaleTones(tonic: Note, scale: Interval[]): (Note | undefined)[] {
+function getScaleTonesNoLog(tonic: Note, scale: Interval[]): Note[] {
     const isValidScaleDegree = createScaleDegreeValidator(tonic);
 
     return scale.map((degree) => {
@@ -55,6 +55,14 @@ function getScaleTones(tonic: Note, scale: Interval[]): (Note | undefined)[] {
             }
         ) as Note;
     });
+}
+
+function getScaleTones(tonic: Note, scale: Interval[]): Note[] {
+    const adjustedTonic = validKeySignatures.includes(tonic)
+        ? tonic
+        : getEnharmonicEquivalent(tonic);
+
+    return getScaleTonesNoLog(adjustedTonic, scale);
 }
 
 function createScaleDegreeValidator(
