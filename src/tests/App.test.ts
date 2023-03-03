@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, vi } from "vitest";
 import {
     getScaleTones,
     getEnharmonicsFromInterval,
@@ -116,6 +116,7 @@ describe("Scale tests", () => {
         });
 
         test("returns the Db scale notes if the key is C# (7 sharps)", () => {
+            const spy = vi.spyOn(console, "log");
             const ionianMode = [
                 N.DFlat,
                 N.EFlat,
@@ -125,10 +126,18 @@ describe("Scale tests", () => {
                 N.BFlat,
                 N.C,
             ];
-            expect(getScaleTones(N.CSharp, S.Ionian)).toStrictEqual(ionianMode);
+            const tonic = N.CSharp;
+            const adjustedTonic = ionianMode[0];
+            expect(getScaleTones(tonic, S.Ionian)).toStrictEqual(ionianMode);
+            expect(spy).toHaveBeenCalledWith(
+                `The key signature ${tonic.name} has been adjusted to the key of ${adjustedTonic.name}`
+            );
+
+            spy.mockRestore();
         });
 
         test("returns the B scale notes if the key is Cb (7 flats)", () => {
+            const spy = vi.spyOn(console, "log");
             const ionianMode = [
                 N.B,
                 N.CSharp,
@@ -138,7 +147,14 @@ describe("Scale tests", () => {
                 N.GSharp,
                 N.ASharp,
             ];
-            expect(getScaleTones(N.CFlat, S.Ionian)).toStrictEqual(ionianMode);
+            const tonic = N.CFlat;
+            const adjustedTonic = ionianMode[0];
+            expect(getScaleTones(tonic, S.Ionian)).toStrictEqual(ionianMode);
+            expect(spy).toHaveBeenCalledWith(
+                `The key signature ${tonic.name} has been adjusted to the key of ${adjustedTonic.name}`
+            );
+
+            spy.mockRestore();
         });
     });
 
