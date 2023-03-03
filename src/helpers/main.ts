@@ -62,6 +62,12 @@ function getScaleTones(tonic: Note, scale: Interval[]): Note[] {
         ? tonic
         : getEnharmonicEquivalent(tonic);
 
+    if (adjustedTonic !== tonic) {
+        console.log(
+            `The key signature ${tonic.name} has been adjusted to the key of ${adjustedTonic.name}`
+        );
+    }
+
     return getScaleTonesNoLog(adjustedTonic, scale);
 }
 
