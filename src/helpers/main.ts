@@ -30,6 +30,17 @@ function getEnharmonicsFromInterval(
     return enharmonics;
 }
 
+function getEnharmonicEquivalent(refNote: Note): Note {
+    const enharmonics: Note[] = getEnharmonicsFromInterval(
+        refNote,
+        Intervals.perfectUnison,
+        "ascending"
+    );
+
+    const enharmonicEquivalent = enharmonics.find((note) => note !== refNote);
+    return enharmonicEquivalent ?? enharmonics[0];
+}
+
 function getScaleTones(tonic: Note, scale: Interval[]): (Note | undefined)[] {
     const isValidScaleDegree = createScaleDegreeValidator(tonic);
 
