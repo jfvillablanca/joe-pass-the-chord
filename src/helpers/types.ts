@@ -45,7 +45,6 @@ type NoteSpelling =
     | "B♯";
 
 type NoteIntervalFromCNatural =
-    | -1
     | 0
     | 1
     | 2

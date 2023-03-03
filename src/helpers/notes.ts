@@ -15,7 +15,7 @@ const CSharp: Note = {
 const CFlat: Note = {
     name: "C flat",
     spelling: "C♭",
-    intervalFromCNatural: -1,
+    intervalFromCNatural: 11,
 };
 
 const D: Note = {
