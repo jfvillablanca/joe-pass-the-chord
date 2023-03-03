@@ -114,6 +114,32 @@ describe("Scale tests", () => {
             ];
             expect(getScaleTones(N.GFlat, S.Ionian)).toStrictEqual(ionianMode);
         });
+
+        test("returns the Db scale notes if the key is C# (7 sharps)", () => {
+            const ionianMode = [
+                N.DFlat,
+                N.EFlat,
+                N.F,
+                N.GFlat,
+                N.AFlat,
+                N.BFlat,
+                N.C,
+            ];
+            expect(getScaleTones(N.CSharp, S.Ionian)).toStrictEqual(ionianMode);
+        });
+
+        test("returns the B scale notes if the key is Cb (7 flats)", () => {
+            const ionianMode = [
+                N.B,
+                N.CSharp,
+                N.DSharp,
+                N.E,
+                N.FSharp,
+                N.GSharp,
+                N.ASharp,
+            ];
+            expect(getScaleTones(N.CFlat, S.Ionian)).toStrictEqual(ionianMode);
+        });
     });
 
     describe("Dorian mode", () => {
