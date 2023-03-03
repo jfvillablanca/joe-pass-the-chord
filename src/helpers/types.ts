@@ -44,7 +44,7 @@ type NoteSpelling =
     | "B♭"
     | "B♯";
 
-type NoteIntervalFromCNatural =
+type NoteDistanceFromCNatural =
     | 0
     | 1
     | 2
@@ -62,7 +62,7 @@ type NoteIntervalFromCNatural =
 type Note = {
     name: NoteName;
     spelling: NoteSpelling;
-    intervalFromCNatural: NoteIntervalFromCNatural;
+    distanceFromCNatural: NoteDistanceFromCNatural;
     relativeOctave?: number;
 };
 

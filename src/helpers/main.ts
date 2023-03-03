@@ -10,8 +10,8 @@ function getEnharmonicsFromInterval(
 ): Note[] {
     const rawDistance =
         direction === "ascending"
-            ? refNote.intervalFromCNatural + interval.semitoneDistance
-            : refNote.intervalFromCNatural - interval.semitoneDistance;
+            ? refNote.distanceFromCNatural + interval.semitoneDistance
+            : refNote.distanceFromCNatural - interval.semitoneDistance;
 
     const normalizedDistance =
         rawDistance >= 0 ? rawDistance % 12 : (rawDistance % 12) + 12;
@@ -19,11 +19,11 @@ function getEnharmonicsFromInterval(
     const enharmonics: Note[] = Object.values(Notes).filter((note: Note) => {
         if (normalizedDistance === 0 || normalizedDistance === 12) {
             return (
-                note.intervalFromCNatural === 0 ||
-                note.intervalFromCNatural === 12
+                note.distanceFromCNatural === 0 ||
+                note.distanceFromCNatural === 12
             );
         } else {
-            return note.intervalFromCNatural === normalizedDistance;
+            return note.distanceFromCNatural === normalizedDistance;
         }
     });
 
@@ -42,8 +42,8 @@ function getEnharmonicEquivalent(refNote: Note): Note {
 }
 
 function getInterval(lowerNote: Note, higherNote: Note): Interval {
-    const loAbsDistance = lowerNote.intervalFromCNatural;
-    const hiAbsDistance = higherNote.intervalFromCNatural;
+    const loAbsDistance = lowerNote.distanceFromCNatural;
+    const hiAbsDistance = higherNote.distanceFromCNatural;
 
     const normalizedInterval =
         hiAbsDistance < loAbsDistance
