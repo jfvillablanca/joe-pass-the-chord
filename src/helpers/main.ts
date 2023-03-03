@@ -102,4 +102,11 @@ function createScaleDegreeValidator(
     };
 }
 
-export { Notes, Scale, Intervals, getEnharmonicsFromInterval, getScaleTones };
+export {
+    Notes,
+    Scale,
+    Intervals,
+    getEnharmonicsFromInterval,
+    getEnharmonicEquivalent,
+    getScaleTones,
+};
