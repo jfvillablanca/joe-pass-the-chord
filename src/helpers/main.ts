@@ -34,4 +34,38 @@ function getScaleTones(tonic: Note, scale: Interval[]): Note[] {
     return [];
 }
 
+function createScaleDegreeValidator(
+    tonic: Note
+): (enharmonicNote: Note) => Boolean {
+    type NaturalNote = "A" | "B" | "C" | "D" | "E" | "F" | "G";
+    const naturalDegrees: NaturalNote[] = [tonic.name[0] as NaturalNote];
+    const nextNaturalDegree: { [key in NaturalNote]: NaturalNote } = {
+        A: "B",
+        B: "C",
+        C: "D",
+        D: "E",
+        E: "F",
+        F: "G",
+        G: "A",
+    };
+
+    const isThisTheNextDegree = (naturalNoteQuery: NaturalNote): Boolean => {
+        return (
+            naturalNoteQuery ===
+            nextNaturalDegree[naturalDegrees[naturalDegrees.length - 1]]
+        );
+    };
+
+    return (enharmonicNote: Note): Boolean => {
+        const naturalizedNoteName: NaturalNote = enharmonicNote
+            .name[0] as NaturalNote;
+
+        if (isThisTheNextDegree(naturalizedNoteName)) {
+            naturalDegrees.push(naturalizedNoteName);
+            return true;
+        }
+        return false;
+    };
+}
+
 export { Notes, Scale, Intervals, getEnharmonicsFromInterval, getScaleTones };
