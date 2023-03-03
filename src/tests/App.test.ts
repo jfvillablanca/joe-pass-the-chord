@@ -69,7 +69,7 @@ describe("Interval tests", () => {
         ).toContain(N.C);
     });
 
-    test("returns the correct when higher note has higher distance from C natural", () => {
+    test("returns the correct interval when higher note has higher distance from C natural", () => {
         const hiNote = N.D;
         const loNote = N.C;
 
