@@ -35,7 +35,7 @@ function getEnharmonicsFromInterval(
     return enharmonics;
 }
 
-function getEnharmonicEquivalent(refNote: Note): Note {
+function _getEnharmonicEquivalent(refNote: Note): Note {
     const enharmonics: Note[] = getEnharmonicsFromInterval(
         refNote,
         Intervals.perfectUnison,
@@ -81,7 +81,7 @@ function _getScaleTones(tonic: Note, scale: Interval[]): Note[] {
 function getScaleTones(tonic: Note, scale: Interval[]): Note[] {
     const adjustedTonic = validKeySignatures.includes(tonic)
         ? tonic
-        : getEnharmonicEquivalent(tonic);
+        : _getEnharmonicEquivalent(tonic);
 
     if (adjustedTonic !== tonic) {
         console.log(
@@ -128,7 +128,6 @@ export {
     Scale,
     Intervals,
     getEnharmonicsFromInterval,
-    getEnharmonicEquivalent,
     getInterval,
     getScaleTones,
 };
