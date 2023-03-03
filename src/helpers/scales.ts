@@ -1,5 +1,5 @@
-import { Interval } from "./types"
-import { Intervals } from "./intervals"
+import { Interval } from "./types";
+import { Intervals } from "./intervals";
 
 const Ionian: Interval[] = [
     Intervals.perfectUnison,
@@ -25,5 +25,4 @@ const Scale = {
     Ionian,
     Dorian,
 };
-
-export { Scale }
+export { Scale };
