@@ -41,7 +41,7 @@ function getEnharmonicEquivalent(refNote: Note): Note {
     return enharmonicEquivalent ?? enharmonics[0];
 }
 
-function getScaleTonesNoLog(tonic: Note, scale: Interval[]): Note[] {
+function _getScaleTones(tonic: Note, scale: Interval[]): Note[] {
     const isValidScaleDegree = createScaleDegreeValidator(tonic);
 
     return scale.map((degree) => {
@@ -68,7 +68,7 @@ function getScaleTones(tonic: Note, scale: Interval[]): Note[] {
         );
     }
 
-    return getScaleTonesNoLog(adjustedTonic, scale);
+    return _getScaleTones(adjustedTonic, scale);
 }
 
 function createScaleDegreeValidator(
