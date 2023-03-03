@@ -1,5 +1,7 @@
 import { Note } from "./types";
 
+const CHROMATIC_SCALE_LENGTH = 12;
+
 const C: Note = {
     name: "C",
     spelling: "C♮",
@@ -150,4 +152,4 @@ const Notes = {
     BFlat,
 };
 
-export { Notes };
+export { Notes, CHROMATIC_SCALE_LENGTH };
