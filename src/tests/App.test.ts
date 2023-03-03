@@ -70,39 +70,49 @@ describe("Interval tests", () => {
 });
 
 describe("Scale tests", () => {
-    test("returns the notes of the Ionian mode in the key of C", () => {
-        const ionianMode = [N.C, N.D, N.E, N.F, N.G, N.A, N.B];
-        expect(getScaleTones(N.C, S.Ionian)).toStrictEqual(ionianMode);
-    });
+    describe("Ionian mode", () => {
+        test("returns the notes of the Ionian mode in the key of C", () => {
+            const ionianMode = [N.C, N.D, N.E, N.F, N.G, N.A, N.B];
+            expect(getScaleTones(N.C, S.Ionian)).toStrictEqual(ionianMode);
+        });
 
-    test("returns the notes of the Ionian mode in the key of F#", () => {
-        const ionianMode = [
-            N.FSharp,
-            N.GSharp,
-            N.ASharp,
-            N.B,
-            N.CSharp,
-            N.DSharp,
-            N.ESharp,
-        ];
-        expect(getScaleTones(N.FSharp, S.Ionian)).toStrictEqual(ionianMode);
-    });
+        test("returns the notes of the Ionian mode in the key of F#", () => {
+            const ionianMode = [
+                N.FSharp,
+                N.GSharp,
+                N.ASharp,
+                N.B,
+                N.CSharp,
+                N.DSharp,
+                N.ESharp,
+            ];
+            expect(getScaleTones(N.FSharp, S.Ionian)).toStrictEqual(ionianMode);
+        });
 
-    test("returns the notes of the Ionian mode in the key of Ab", () => {
-        const ionianMode = [N.AFlat, N.BFlat, N.C, N.DFlat, N.EFlat, N.F, N.G];
-        expect(getScaleTones(N.AFlat, S.Ionian)).toStrictEqual(ionianMode);
-    });
+        test("returns the notes of the Ionian mode in the key of Ab", () => {
+            const ionianMode = [
+                N.AFlat,
+                N.BFlat,
+                N.C,
+                N.DFlat,
+                N.EFlat,
+                N.F,
+                N.G,
+            ];
+            expect(getScaleTones(N.AFlat, S.Ionian)).toStrictEqual(ionianMode);
+        });
 
-    test("returns the notes of the Ionian mode in the key of Gb", () => {
-        const ionianMode = [
-            N.GFlat,
-            N.AFlat,
-            N.BFlat,
-            N.CFlat,
-            N.DFlat,
-            N.EFlat,
-            N.F,
-        ];
-        expect(getScaleTones(N.GFlat, S.Ionian)).toStrictEqual(ionianMode);
+        test("returns the notes of the Ionian mode in the key of Gb", () => {
+            const ionianMode = [
+                N.GFlat,
+                N.AFlat,
+                N.BFlat,
+                N.CFlat,
+                N.DFlat,
+                N.EFlat,
+                N.F,
+            ];
+            expect(getScaleTones(N.GFlat, S.Ionian)).toStrictEqual(ionianMode);
+        });
     });
 });
