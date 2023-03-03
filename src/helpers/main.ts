@@ -1,4 +1,4 @@
-import { Notes } from "./notes";
+import { CHROMATIC_SCALE_LENGTH, Notes } from "./notes";
 import { Intervals } from "./intervals";
 import { Scale, validKeySignatures } from "./scales";
 import { Interval, Note } from "./types";
@@ -42,13 +42,16 @@ function getEnharmonicEquivalent(refNote: Note): Note {
 }
 
 function getInterval(lowerNote: Note, higherNote: Note): Interval {
-    const absDistanceForLowNote = lowerNote.intervalFromCNatural;
-    const absDistanceForHighNote = higherNote.intervalFromCNatural;
+    const loAbsDistance = lowerNote.intervalFromCNatural;
+    const hiAbsDistance = higherNote.intervalFromCNatural;
+
+    const normalizedInterval =
+        hiAbsDistance < loAbsDistance
+            ? CHROMATIC_SCALE_LENGTH - (loAbsDistance - hiAbsDistance)
+            : hiAbsDistance - loAbsDistance;
 
     const interval = Object.values(Intervals).filter(
-        (interval) =>
-            interval.semitoneDistance ===
-            absDistanceForHighNote - absDistanceForLowNote
+        (interval) => interval.semitoneDistance === normalizedInterval
     );
 
     return interval[0];
