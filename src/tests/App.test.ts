@@ -115,4 +115,11 @@ describe("Scale tests", () => {
             expect(getScaleTones(N.GFlat, S.Ionian)).toStrictEqual(ionianMode);
         });
     });
+
+    describe("Dorian mode", () => {
+        test("returns the notes of the Ionian mode in the key of D", () => {
+            const ionianMode = [N.D, N.E, N.F, N.G, N.A, N.B, N.C];
+            expect(getScaleTones(N.D, S.Dorian)).toStrictEqual(ionianMode);
+        });
+    });
 });
