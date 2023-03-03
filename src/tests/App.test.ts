@@ -117,28 +117,28 @@ describe("Scale tests", () => {
     });
 
     describe("Dorian mode", () => {
-        test("returns the notes of the Ionian mode in the key of D", () => {
+        test("returns the notes of the Dorian mode in the key of D", () => {
             const dorianMode = [N.D, N.E, N.F, N.G, N.A, N.B, N.C];
             expect(getScaleTones(N.D, S.Dorian)).toStrictEqual(dorianMode);
         });
     });
 
     describe("Phrygian mode", () => {
-        test("returns the notes of the Ionian mode in the key of E", () => {
+        test("returns the notes of the Phrygian mode in the key of E", () => {
             const phrygianMode = [N.E, N.F, N.G, N.A, N.B, N.C, N.D];
             expect(getScaleTones(N.E, S.Phrygian)).toStrictEqual(phrygianMode);
         });
     });
 
     describe("Lydian mode", () => {
-        test("returns the notes of the Ionian mode in the key of F", () => {
+        test("returns the notes of the Lydian mode in the key of F", () => {
             const lydianMode = [N.F, N.G, N.A, N.B, N.C, N.D, N.E];
             expect(getScaleTones(N.F, S.Lydian)).toStrictEqual(lydianMode);
         });
     });
 
     describe("Mixolydian mode", () => {
-        test("returns the notes of the Ionian mode in the key of G", () => {
+        test("returns the notes of the Mixolydian mode in the key of G", () => {
             const mixolydianMode = [N.G, N.A, N.B, N.C, N.D, N.E, N.F];
             expect(getScaleTones(N.G, S.Mixolydian)).toStrictEqual(
                 mixolydianMode
@@ -147,14 +147,14 @@ describe("Scale tests", () => {
     });
 
     describe("Aeolian mode", () => {
-        test("returns the notes of the Ionian mode in the key of A", () => {
+        test("returns the notes of the Aeolian mode in the key of A", () => {
             const aeolianMode = [N.A, N.B, N.C, N.D, N.E, N.F, N.G];
             expect(getScaleTones(N.A, S.Aeolian)).toStrictEqual(aeolianMode);
         });
     });
 
     describe("Locrian mode", () => {
-        test("returns the notes of the Ionian mode in the key of B", () => {
+        test("returns the notes of the Locrian mode in the key of B", () => {
             const locrianMode = [N.B, N.C, N.D, N.E, N.F, N.G, N.A];
             expect(getScaleTones(N.B, S.Locrian)).toStrictEqual(locrianMode);
         });
