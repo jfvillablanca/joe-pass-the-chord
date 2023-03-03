@@ -82,6 +82,13 @@ describe("Interval tests", () => {
 
         expect(getInterval(loNote, hiNote)).toBe(I.minorSeventh);
     });
+
+    test("returns perfect unison interval if the two notes are the same", () => {
+        const hiNote = N.C;
+        const loNote = N.C;
+
+        expect(getInterval(loNote, hiNote)).toBe(I.perfectUnison);
+    });
 });
 
 describe("Scale tests", () => {
