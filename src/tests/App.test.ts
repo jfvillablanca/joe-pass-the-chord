@@ -88,4 +88,21 @@ describe("Scale tests", () => {
         expect(getScaleTones(N.FSharp, S.Ionian)).toStrictEqual(ionianMode);
     });
 
+    test("returns the notes of the Ionian mode in the key of Ab", () => {
+        const ionianMode = [N.AFlat, N.BFlat, N.C, N.DFlat, N.EFlat, N.F, N.G];
+        expect(getScaleTones(N.AFlat, S.Ionian)).toStrictEqual(ionianMode);
+    });
+
+    test("returns the notes of the Ionian mode in the key of Gb", () => {
+        const ionianMode = [
+            N.GFlat,
+            N.AFlat,
+            N.BFlat,
+            N.CFlat,
+            N.DFlat,
+            N.EFlat,
+            N.F,
+        ];
+        expect(getScaleTones(N.GFlat, S.Ionian)).toStrictEqual(ionianMode);
+    });
 });
