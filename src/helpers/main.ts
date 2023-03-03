@@ -14,13 +14,18 @@ function getEnharmonicsFromInterval(
             : refNote.distanceFromCNatural - interval.semitoneDistance;
 
     const normalizedDistance =
-        rawDistance >= 0 ? rawDistance % 12 : (rawDistance % 12) + 12;
+        rawDistance >= 0
+            ? rawDistance % CHROMATIC_SCALE_LENGTH
+            : (rawDistance % CHROMATIC_SCALE_LENGTH) + CHROMATIC_SCALE_LENGTH;
 
     const enharmonics: Note[] = Object.values(Notes).filter((note: Note) => {
-        if (normalizedDistance === 0 || normalizedDistance === 12) {
+        if (
+            normalizedDistance === 0 ||
+            normalizedDistance === CHROMATIC_SCALE_LENGTH
+        ) {
             return (
                 note.distanceFromCNatural === 0 ||
-                note.distanceFromCNatural === 12
+                note.distanceFromCNatural === CHROMATIC_SCALE_LENGTH
             );
         } else {
             return note.distanceFromCNatural === normalizedDistance;
