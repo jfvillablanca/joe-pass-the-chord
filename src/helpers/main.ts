@@ -41,6 +41,19 @@ function getEnharmonicEquivalent(refNote: Note): Note {
     return enharmonicEquivalent ?? enharmonics[0];
 }
 
+function getInterval(lowerNote: Note, higherNote: Note): Interval {
+    const absDistanceForLowNote = lowerNote.intervalFromCNatural;
+    const absDistanceForHighNote = higherNote.intervalFromCNatural;
+
+    const interval = Object.values(Intervals).filter(
+        (interval) =>
+            interval.semitoneDistance ===
+            absDistanceForHighNote - absDistanceForLowNote
+    );
+
+    return interval[0];
+}
+
 function _getScaleTones(tonic: Note, scale: Interval[]): Note[] {
     const isValidScaleDegree = createScaleDegreeValidator(tonic);
 
@@ -108,5 +121,6 @@ export {
     Intervals,
     getEnharmonicsFromInterval,
     getEnharmonicEquivalent,
+    getInterval,
     getScaleTones,
 };
