@@ -50,7 +50,7 @@ function createScaleDegreeValidator(
     tonic: Note
 ): (enharmonicNote: Note) => Boolean {
     type NaturalNote = "A" | "B" | "C" | "D" | "E" | "F" | "G";
-    const naturalDegrees: NaturalNote[] = [tonic.name[0] as NaturalNote];
+    let currentScaleDegree: NaturalNote = tonic.name[0] as NaturalNote;
     const nextNaturalDegree: { [key in NaturalNote]: NaturalNote } = {
         A: "B",
         B: "C",
@@ -62,10 +62,7 @@ function createScaleDegreeValidator(
     };
 
     const isThisTheNextDegree = (naturalNoteQuery: NaturalNote): Boolean => {
-        return (
-            naturalNoteQuery ===
-            nextNaturalDegree[naturalDegrees[naturalDegrees.length - 1]]
-        );
+        return naturalNoteQuery === nextNaturalDegree[currentScaleDegree];
     };
 
     return (enharmonicNote: Note): Boolean => {
@@ -73,7 +70,7 @@ function createScaleDegreeValidator(
             .name[0] as NaturalNote;
 
         if (isThisTheNextDegree(naturalizedNoteName)) {
-            naturalDegrees.push(naturalizedNoteName);
+            currentScaleDegree = naturalizedNoteName;
             return true;
         }
         return false;
