@@ -75,6 +75,13 @@ describe("Interval tests", () => {
 
         expect(getInterval(loNote, hiNote)).toBe(I.majorSecond);
     });
+
+    test("returns the correct interval when lower note has higher distance from C natural", () => {
+        const hiNote = N.C;
+        const loNote = N.D;
+
+        expect(getInterval(loNote, hiNote)).toBe(I.minorSeventh);
+    });
 });
 
 describe("Scale tests", () => {
