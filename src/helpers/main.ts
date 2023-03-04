@@ -124,39 +124,41 @@ function _createScaleDegreeValidator(
 }
 
 function getChordLabels(notes: Note[]): Chord[] {
-    const pitchClasses = Array.from(new Set(notes));
-
-    const assumedRootNotes = pitchClasses;
-    const possibleChords = assumedRootNotes
+    const uniqueNotes = Array.from(new Set(notes));
+    const candidateRootNotes = uniqueNotes;
+    const chords = candidateRootNotes
         .map((rootNote) => {
-            const assumedThird = _getAssumedThird(rootNote, pitchClasses);
-            return pitchClasses.map((bassNote, i) => {
-                const chordTones = pitchClasses.filter((_, j) => j !== i);
+            const potentialThird = _getPotentialThird(rootNote, uniqueNotes);
+
+            return uniqueNotes.map((currentBassNote, position) => {
+                const basslessChordNotes = uniqueNotes.filter(
+                    (note) => note !== currentBassNote
+                );
                 const inversion =
-                    i === 0
+                    position === 0
                         ? "root"
-                        : i === 1
+                        : position === 1
                         ? "first"
-                        : i === 2
+                        : position === 2
                         ? "second"
                         : "third";
 
                 const chord: Chord = {
                     root: rootNote,
-                    chordTones: [bassNote, ...chordTones],
+                    chordTones: [currentBassNote, ...basslessChordNotes],
                     inversion: inversion,
-                    quality: _getChordQuality(rootNote, assumedThird),
+                    quality: _getChordQuality(rootNote, potentialThird),
                 };
                 return chord;
             });
         })
         .flat();
 
-    return possibleChords;
+    return chords;
 }
 
-function _getChordQuality(root: Note, assumedThird: Note) {
-    switch (getInterval(root, assumedThird)) {
+function _getChordQuality(root: Note, potentialThird: Note) {
+    switch (getInterval(root, potentialThird)) {
         case Intervals.majorThird:
             return "major";
 
@@ -174,14 +176,14 @@ function _getChordQuality(root: Note, assumedThird: Note) {
     }
 }
 
-function _getAssumedThird(root: Note, chordTones: Note[]): Note {
+function _getPotentialThird(root: Note, chordTones: Note[]): Note {
     const rootlessChordTones = chordTones.filter((note) => note !== root);
     return rootlessChordTones.reduce(
-        (closestNote, chordNote) =>
-            getInterval(root, chordNote).semitoneDistance <
-            getInterval(root, closestNote).semitoneDistance
-                ? chordNote
-                : closestNote,
+        (closestTone, chordTone) =>
+            getInterval(root, chordTone).semitoneDistance <
+            getInterval(root, closestTone).semitoneDistance
+                ? chordTone
+                : closestTone,
         rootlessChordTones[0]
     );
 }
