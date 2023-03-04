@@ -63,7 +63,7 @@ function getInterval(lowerNote: Note, higherNote: Note): Interval {
 }
 
 function _getScaleTones(tonic: Note, scale: Interval[]): Note[] {
-    const isValidScaleDegree = createScaleDegreeValidator(tonic);
+    const isValidScaleDegree = _createScaleDegreeValidator(tonic);
 
     return scale.map((degree) => {
         if (degree === Intervals.perfectUnison) {
@@ -92,7 +92,7 @@ function getScaleTones(tonic: Note, scale: Interval[]): Note[] {
     return _getScaleTones(adjustedTonic, scale);
 }
 
-function createScaleDegreeValidator(
+function _createScaleDegreeValidator(
     tonic: Note
 ): (enharmonicNote: Note) => Boolean {
     type NaturalNote = "A" | "B" | "C" | "D" | "E" | "F" | "G";
