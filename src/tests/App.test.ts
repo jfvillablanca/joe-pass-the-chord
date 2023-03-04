@@ -238,5 +238,20 @@ describe("Chord tests", () => {
                 )
             ).toContainEqual(cMajorRoot);
         });
+
+        test("should return an array containing inversion permutations", () => {
+            const cShapeCowboyChord = [N.C, N.E, N.G, N.C, N.E];
+            const cMajorRoot = [N.C, N.E, N.G];
+            const cMajorFirst = [N.E, N.C, N.G];
+            const cMajorSecond = [N.G, N.C, N.E];
+
+            expect(
+                getChordLabels(cShapeCowboyChord).map(
+                    (chord) => chord.chordTones
+                )
+            ).toEqual(
+                expect.arrayContaining([cMajorRoot, cMajorFirst, cMajorSecond])
+            );
+        });
     });
 });
