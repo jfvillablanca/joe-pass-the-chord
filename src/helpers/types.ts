@@ -217,10 +217,12 @@ type Interval = {
 
 type ChordQuality = "major" | "minor" | "suspended second" | "suspended fourth"
 
+type Inversion = "root" | "first" | "second" | "third";
+
 type Chord = {
     root: Note;
     chordTones: Note[];
-    inversion: "root" | "first" | "second" | "third";
+    inversion: Inversion;
     quality?: ChordQuality | null;
 }
 
