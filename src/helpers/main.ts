@@ -153,6 +153,25 @@ function getChordLabels(notes: Note[]): Chord[] {
     return possibleChords;
 }
 
+function _getChordQuality(root: Note, assumedThird: Note) {
+    switch (getInterval(root, assumedThird)) {
+        case Intervals.majorThird:
+            return "major";
+
+        case Intervals.minorThird:
+            return "minor";
+
+        case Intervals.majorSecond:
+            return "suspended second";
+
+        case Intervals.perfectFourth:
+            return "suspended fourth";
+
+        default:
+            return null;
+    }
+}
+
 function _getAssumedThird(root: Note, chordTones: Note[]): Note {
     const rootlessChordTones = chordTones.filter((note) => note !== root);
     return rootlessChordTones.reduce(
