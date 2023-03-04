@@ -153,6 +153,18 @@ function getChordLabels(notes: Note[]): Chord[] {
     return possibleChords;
 }
 
+function _getAssumedThird(root: Note, chordTones: Note[]): Note {
+    const rootlessChordTones = chordTones.filter((note) => note !== root);
+    return rootlessChordTones.reduce(
+        (closestNote, chordNote) =>
+            getInterval(root, chordNote).semitoneDistance <
+            getInterval(root, closestNote).semitoneDistance
+                ? chordNote
+                : closestNote,
+        rootlessChordTones[0]
+    );
+}
+
 export {
     Notes,
     Scale,
