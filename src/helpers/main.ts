@@ -126,18 +126,30 @@ function _createScaleDegreeValidator(
 function getChordLabels(notes: Note[]): Chord[] {
     const pitchClasses = Array.from(new Set(notes));
 
-    const possibleChords = pitchClasses.map((bassNote, i) => {
-        const chordTones = pitchClasses.filter((_, j) => j !== i);
-        const inversion =
-            i === 0 ? "root" : i === 1 ? "first" : i === 2 ? "second" : "third";
+    const assumedRootNotes = pitchClasses;
+    const possibleChords = assumedRootNotes
+        .map((rootNote) => {
+            return pitchClasses.map((bassNote, i) => {
+                const chordTones = pitchClasses.filter((_, j) => j !== i);
+                const inversion =
+                    i === 0
+                        ? "root"
+                        : i === 1
+                        ? "first"
+                        : i === 2
+                        ? "second"
+                        : "third";
 
-        const chord: Chord = {
-            root: bassNote,
-            chordTones: [bassNote, ...chordTones],
-            inversion: inversion,
-        };
-        return chord;
-    });
+                const chord: Chord = {
+                    root: rootNote,
+                    chordTones: [bassNote, ...chordTones],
+                    inversion: inversion,
+                };
+                return chord;
+            });
+        })
+        .flat();
+
     return possibleChords;
 }
 
