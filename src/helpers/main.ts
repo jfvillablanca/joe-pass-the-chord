@@ -129,6 +129,7 @@ function getChordLabels(notes: Note[]): Chord[] {
     const assumedRootNotes = pitchClasses;
     const possibleChords = assumedRootNotes
         .map((rootNote) => {
+            const assumedThird = _getAssumedThird(rootNote, pitchClasses);
             return pitchClasses.map((bassNote, i) => {
                 const chordTones = pitchClasses.filter((_, j) => j !== i);
                 const inversion =
@@ -144,6 +145,7 @@ function getChordLabels(notes: Note[]): Chord[] {
                     root: rootNote,
                     chordTones: [bassNote, ...chordTones],
                     inversion: inversion,
+                    quality: _getChordQuality(rootNote, assumedThird),
                 };
                 return chord;
             });
