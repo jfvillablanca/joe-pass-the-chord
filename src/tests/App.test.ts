@@ -6,6 +6,7 @@ import {
     Intervals as I,
     Scale as S,
     getInterval,
+    getChordLabels,
 } from "../helpers/main";
 
 describe("Interval tests", () => {
@@ -221,6 +222,21 @@ describe("Scale tests", () => {
         test("returns the notes of the Locrian mode in the key of B", () => {
             const locrianMode = [N.B, N.C, N.D, N.E, N.F, N.G, N.A];
             expect(getScaleTones(N.B, S.Locrian)).toStrictEqual(locrianMode);
+        });
+    });
+});
+
+describe("Chord tests", () => {
+    describe("Triads", () => {
+        test("should return unique pitch classes from an array of notes", () => {
+            const cShapeCowboyChord = [N.C, N.E, N.G, N.C, N.E];
+            const cMajorRoot = [N.C, N.E, N.G];
+
+            expect(
+                getChordLabels(cShapeCowboyChord).map(
+                    (chord) => chord.chordTones
+                )
+            ).toContainEqual(cMajorRoot);
         });
     });
 });
