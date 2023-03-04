@@ -215,10 +215,13 @@ type Interval = {
     compoundSpicyQuality: CompoundSpicyQuality;
 };
 
+type ChordQuality = "major" | "minor" | "suspended second" | "suspended fourth"
+
 type Chord = {
     root: Note;
     chordTones: Note[];
     inversion: "root" | "first" | "second" | "third";
+    quality?: ChordQuality | null;
 }
 
 export type { Note, Interval, Chord };
