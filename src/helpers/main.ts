@@ -1,7 +1,7 @@
 import { CHROMATIC_SCALE_LENGTH, Notes } from "./notes";
 import { Intervals } from "./intervals";
 import { Scale, validKeySignatures } from "./scales";
-import { Interval, Note } from "./types";
+import { Chord, Interval, Note } from "./types";
 
 function getEnharmonicsFromInterval(
     refNote: Note,
@@ -123,6 +123,24 @@ function createScaleDegreeValidator(
     };
 }
 
+function getChordLabels(notes: Note[]): Chord[] {
+    const pitchClasses = Array.from(new Set(notes));
+
+    const possibleChords = pitchClasses.map((bassNote, i) => {
+        const chordTones = pitchClasses.filter((_, j) => j !== i);
+        const inversion =
+            i === 0 ? "root" : i === 1 ? "first" : i === 2 ? "second" : "third";
+
+        const chord: Chord = {
+            root: bassNote,
+            chordTones: [bassNote, ...chordTones],
+            inversion: inversion,
+        };
+        return chord;
+    });
+    return possibleChords;
+}
+
 export {
     Notes,
     Scale,
@@ -130,4 +148,5 @@ export {
     getEnharmonicsFromInterval,
     getInterval,
     getScaleTones,
+    getChordLabels,
 };
