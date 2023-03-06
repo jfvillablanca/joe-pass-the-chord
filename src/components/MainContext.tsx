@@ -1,6 +1,9 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
-export const FretClickContext = createContext<(note: string) => void>(() => {});
+const FretClickContext = createContext<(note: string) => void>(() => {});
+export function useFretClickContext() {
+    return useContext(FretClickContext);
+}
 
 export function MainContext({ children }: { children: React.ReactNode }) {
     const handleFretClick = (note: string) => {
