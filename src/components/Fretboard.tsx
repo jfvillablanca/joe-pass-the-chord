@@ -22,13 +22,19 @@ function Fretboard() {
 
 export default Fretboard;
 
-function Fret({ note }: { note: string }) {
+function Fret({
+    note,
+    isInFretBoard,
+}: {
+    note: string;
+    isInFretBoard: boolean;
+}) {
     const handleFretClick = useFretClickContext();
+
+    const style = isInFretBoard ? "border borderinc-200 w-8 h-8" : "border rounded-full w-8 h-8 ml-2";
+
     return (
-        <button
-            className='border border-zinc-200 w-8 h-8'
-            onClick={() => handleFretClick(note)}
-        >
+        <button className={style} onClick={() => handleFretClick(note)}>
             {note}
         </button>
     );
