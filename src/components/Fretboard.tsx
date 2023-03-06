@@ -1,18 +1,26 @@
 import { nanoid } from "nanoid";
-import { useFretClickContext, useRenderedFrets } from "./MainContext";
+import {
+    useFretClickContext,
+    useRenderedFrets,
+    useTuningContext,
+} from "./MainContext";
 
 function Fretboard() {
     const fretsToRender = useRenderedFrets();
-    const frets = fretsToRender.map((string) => {
+    const tuning = useTuningContext();
+    const frets = fretsToRender.map((string, stringNum) => {
         return (
             <ul className='flex' key={nanoid()}>
                 {string.map((fretNote) => {
                     return (
                         <li key={nanoid()}>
-                            <Fret note={fretNote} />
+                            <Fret note={fretNote} isInFretBoard={true} />
                         </li>
                     );
                 })}
+                <li key={nanoid()}>
+                    <Fret note={tuning[stringNum]} isInFretBoard={false} />
+                </li>
             </ul>
         );
     });
