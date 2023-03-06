@@ -5,9 +5,13 @@ function Fretboard() {
     const fretsToRender = useRenderedFrets();
     const frets = fretsToRender.map((string) => {
         return (
-            <ul key={nanoid()}>
+            <ul className='flex' key={nanoid()}>
                 {string.map((fretNote) => {
-                    return <Fret key={nanoid()} note={fretNote} />;
+                    return (
+                        <li key={nanoid()}>
+                            <Fret note={fretNote} />
+                        </li>
+                    );
                 })}
             </ul>
         );
