@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 const FretClickContext = createContext<(note: string) => void>(() => {});
 const TuningContext = createContext<string[]>([]);
@@ -13,6 +13,8 @@ export function useTuningContext() {
 
 export function MainContext({ children }: { children: React.ReactNode }) {
     const tuning = ["E", "A", "D", "G", "B", "E"];
+    const noOfFrets = 5;
+    const [lowestRenderedFretNum, setLowestRenderedFretNum] = useState(1);
     const handleFretClick = (note: string) => {
         console.log(note);
     };
