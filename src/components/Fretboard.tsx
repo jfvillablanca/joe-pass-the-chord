@@ -1,7 +1,8 @@
-function Fretboard(){}
 import { useFretClickContext } from "./MainContext";
 
-export default Fretboard
+function Fretboard() {
+}
+export default Fretboard;
 
 function Fret({ note }: { note: string }) {
     const handleFretClick = useFretClickContext();
