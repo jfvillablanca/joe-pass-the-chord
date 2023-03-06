@@ -11,6 +11,8 @@
     },
     "dependencies": {
         "@tonaljs/chord-detect": "^4.8.0",
+        "@tonaljs/interval": "^4.8.0",
+        "@tonaljs/note": "^4.10.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
