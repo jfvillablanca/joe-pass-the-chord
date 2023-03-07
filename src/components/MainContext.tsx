@@ -37,10 +37,17 @@ export function MainContext({ children }: { children: React.ReactNode }) {
         return tuning.map(() => "muted" as FingeredString);
     };
 
+    const initializeChordTones = () => {
+        return tuning.map(() => "");
+    };
+
     const [lowestRenderedFretNum, setLowestRenderedFretNum] = useState(1);
     const [renderedFrets, setRenderedFrets] = useState(computeRenderedFrets());
     const [fingeredStrings, setFingeredStrings] = useState(
         initializeFingeredStrings()
+    );
+    const [chordTones, setChordTones] = useState<string[]>(
+        initializeChordTones()
     );
 
     const handleFretClick = (cell: FretCell) => {
