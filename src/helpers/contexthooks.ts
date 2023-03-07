@@ -11,6 +11,7 @@ export const ChordTonesContext = createContext<string[]>([]);
 export const FretScrollContext = createContext<
     (direction: "higher" | "lower") => void
 >(() => {});
+export const LowestFretScrollContext = createContext<number>(1);
 
 export function useFretClickContext() {
     return useContext(FretClickContext);
@@ -31,6 +32,11 @@ export function useFingeredFretContext() {
 export function useChordTonesContext() {
     return useContext(ChordTonesContext);
 }
+
 export function useFretScrollContext() {
     return useContext(FretScrollContext);
+}
+
+export function useLowestFretScrollContext() {
+    return useContext(LowestFretScrollContext);
 }
