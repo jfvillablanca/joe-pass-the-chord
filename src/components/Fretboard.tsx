@@ -1,6 +1,8 @@
 import { nanoid } from "nanoid";
 import {
+    FingeredString,
     FretCell,
+    useFingeredStringContext,
     useFretClickContext,
     useRenderedFretsContext,
     useTuningContext,
@@ -8,6 +10,7 @@ import {
 
 function Fretboard() {
     const fretsToRender = useRenderedFretsContext();
+    const ringingStrings = useFingeredStringContext();
     const tuning = useTuningContext();
     const frets = fretsToRender.map((string: FretCell[], stringNum: number) => {
         return (
