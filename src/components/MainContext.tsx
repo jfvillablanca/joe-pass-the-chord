@@ -48,19 +48,15 @@ export function MainContext({ children }: { children: React.ReactNode }) {
         });
     };
 
-    const initializeRingingNotes = () => {
-        return tuning.map(() => {
-            return Array.from({ length: numberOfFrets })
-                .map(() => {
-                    return 0;
-                })
-                .reverse();
-        });
+    const initializeFingeredStrings = () => {
+        return tuning.map(() => "muted" as FingeredString);
     };
 
     const [lowestRenderedFretNum, setLowestRenderedFretNum] = useState(1);
     const [renderedFrets, setRenderedFrets] = useState(computeRenderedFrets());
-    const [ringingNotes, setRingingNotes] = useState(initializeRingingNotes());
+    const [fingeredStrings, setFingeredStrings] = useState(
+        initializeFingeredStrings()
+    );
 
     const handleFretClick = (cell: FretCell) => {
         console.log(cell);
