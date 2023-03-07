@@ -90,8 +90,8 @@ export function MainContext({ children }: { children: React.ReactNode }) {
                     : newLowestRenderedFretNum;
             }
             const newLowestRenderedFretNum = prevLowestRenderedFretNum + 1;
-            return newLowestRenderedFretNum > highestFretNum - numberOfFrets
-                ? highestFretNum - numberOfFrets
+            return newLowestRenderedFretNum > highestFretNum - numberOfFrets + 1
+                ? highestFretNum - numberOfFrets + 1
                 : newLowestRenderedFretNum;
         });
     };
