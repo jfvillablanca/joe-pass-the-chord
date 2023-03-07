@@ -21,36 +21,17 @@ function Fretboard() {
             <ul className='flex' key={nanoid()}>
                 {string
                     .map((cell: FretCell) => {
+                        const highlight =
+                            ringingStrings[stringNum] === cell.fret
+                                ? "ringing"
+                                : ringingStrings[stringNum] === "muted" &&
+                                  cell.fret === 0
+                                ? "muted"
+                                : "";
+
                         return (
                             <li key={nanoid()}>
-                                {cell.fret !== 0 ? (
-                                    <Fret
-                                        cell={cell}
-                                        highlight={
-                                            ringingStrings[stringNum] ===
-                                            cell.fret
-                                                ? "ringing"
-                                                : ""
-                                        }
-                                    />
-                                ) : (
-                                    <Fret
-                                        cell={{
-                                            note: tuning[stringNum],
-                                            string: stringNum,
-                                            fret: 0,
-                                        }}
-                                        highlight={
-                                            ringingStrings[stringNum] ===
-                                            "muted"
-                                                ? "muted"
-                                                : ringingStrings[stringNum] ===
-                                                  0
-                                                ? "ringing"
-                                                : ""
-                                        }
-                                    />
-                                )}
+                                <Fret cell={cell} highlight={highlight} />
                             </li>
                         );
                     })
