@@ -13,6 +13,7 @@ import { FingeredString, FretCell } from "../helpers/types";
 export function MainContext({ children }: { children: React.ReactNode }) {
     const tuning = ["E", "A", "D", "G", "B", "E"];
     const numberOfFrets = 5;
+    const highestFretNum = 24;
 
     const computeRenderedFrets = () => {
         return tuning.map((openStringNote, string) => {
@@ -68,6 +69,21 @@ export function MainContext({ children }: { children: React.ReactNode }) {
                 }
                 return stringNumber === cell.string ? cell.note : chordTone;
             });
+        });
+    };
+
+    const handleFretScroll = (direction: "higher" | "lower") => {
+        setLowestRenderedFretNum((prevLowestRenderedFretNum) => {
+            if (direction === "lower") {
+                const newLowestRenderedFretNum = prevLowestRenderedFretNum - 1;
+                return newLowestRenderedFretNum < 1
+                    ? 1
+                    : newLowestRenderedFretNum;
+            }
+            const newLowestRenderedFretNum = prevLowestRenderedFretNum + 1;
+            return newLowestRenderedFretNum > highestFretNum - numberOfFrets
+                ? highestFretNum - numberOfFrets
+                : newLowestRenderedFretNum;
         });
     };
 
