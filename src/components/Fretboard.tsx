@@ -45,6 +45,8 @@ function Fretboard() {
 
 export default Fretboard;
 
+const fretWidth = 'w-8';
+
 function Fret({
     cell,
     highlight,
@@ -59,8 +61,8 @@ function Fret({
 
     const style =
         cell.fret !== 0
-            ? `border borderinc-200 w-8 h-8 ${ringingStyle}`
-            : `border rounded-full w-8 h-8 ml-2 ${ringingStyle} ${mutedStyle}`;
+            ? `border borderinc-200 ${fretWidth} h-8 ${ringingStyle}`
+            : `border rounded-full ${fretWidth} h-8 ml-2 ${ringingStyle} ${mutedStyle}`;
 
     return (
         <button className={style} onClick={() => handleFretClick(cell)}>
