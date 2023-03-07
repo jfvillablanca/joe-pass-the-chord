@@ -13,6 +13,8 @@ import {
 import { FingeredString, FretCell } from "../helpers/types";
 
 export function MainContext({ children }: { children: React.ReactNode }) {
+    // NOTE: tuning and no of frets cound could become state
+    // variables as features in the future
     const tuning = ["E", "A", "D", "G", "B", "E"];
     const numberOfFrets = 5;
     const highestFretNum = 24;
@@ -59,7 +61,10 @@ export function MainContext({ children }: { children: React.ReactNode }) {
     const handleFretClick = (cell: FretCell) => {
         setFingeredFrets((prevFingeredFrets) => {
             return prevFingeredFrets.map((fingeredFret, stringNumber) => {
-                if (fingeredFret === cell.fret && stringNumber === cell.string) {
+                if (
+                    fingeredFret === cell.fret &&
+                    stringNumber === cell.string
+                ) {
                     return "muted";
                 }
                 return stringNumber === cell.string ? cell.fret : fingeredFret;
