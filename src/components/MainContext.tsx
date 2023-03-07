@@ -26,13 +26,18 @@ export type FretCell = {
 
 export function MainContext({ children }: { children: React.ReactNode }) {
     const computeRenderedFrets = () => {
-        return tuning.map((openStringNote) => {
+        return tuning.map((openStringNote, stringNumber) => {
             return Array.from({ length: noOfFrets })
                 .map((_, fretOffset) => {
-                    return transpose(
-                        openStringNote,
-                        fromSemitones(lowestRenderedFretNum + fretOffset)
-                    );
+                    const fretCell: FretCell = {
+                        note: transpose(
+                            openStringNote,
+                            fromSemitones(lowestRenderedFretNum + fretOffset)
+                        ),
+                        stringNumber: stringNumber,
+                        fretNumber: lowestRenderedFretNum + fretOffset,
+                    };
+                    return fretCell;
                 })
                 .reverse();
         });
