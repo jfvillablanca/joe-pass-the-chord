@@ -5,6 +5,8 @@ import {
     ChordTonesContext,
     FingeredFretContext,
     FretClickContext,
+    FretScrollContext,
+    LowestFretScrollContext,
     RenderedFretsContext,
     TuningContext,
 } from "../helpers/contexthooks";
@@ -90,13 +92,17 @@ export function MainContext({ children }: { children: React.ReactNode }) {
     return (
         <TuningContext.Provider value={tuning}>
             <RenderedFretsContext.Provider value={renderedFrets}>
-                <FretClickContext.Provider value={handleFretClick}>
-                    <FingeredFretContext.Provider value={fingeredFrets}>
-                        <ChordTonesContext.Provider value={chordTones}>
-                            {children}
-                        </ChordTonesContext.Provider>
-                    </FingeredFretContext.Provider>
-                </FretClickContext.Provider>
+                <LowestFretScrollContext.Provider value={lowestRenderedFretNum}>
+                    <FretScrollContext.Provider value={handleFretScroll}>
+                        <FretClickContext.Provider value={handleFretClick}>
+                            <FingeredFretContext.Provider value={fingeredFrets}>
+                                <ChordTonesContext.Provider value={chordTones}>
+                                    {children}
+                                </ChordTonesContext.Provider>
+                            </FingeredFretContext.Provider>
+                        </FretClickContext.Provider>
+                    </FretScrollContext.Provider>
+                </LowestFretScrollContext.Provider>
             </RenderedFretsContext.Provider>
         </TuningContext.Provider>
     );
