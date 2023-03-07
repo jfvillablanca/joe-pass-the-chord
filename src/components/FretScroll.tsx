@@ -4,6 +4,14 @@ export default function FretScroll({
     children: React.ReactNode;
 }) {
     return (
-        <div>{children}</div>
+        <div className='flex'>
+            <ScrollButton direction={"higher"} />
+            {children}
+            <ScrollButton direction={"lower"} />
+        </div>
     );
+}
+
+function ScrollButton({ direction }: { direction: "higher" | "lower" }) {
+    return <button>{direction}</button>;
 }
