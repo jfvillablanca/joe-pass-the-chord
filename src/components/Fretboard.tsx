@@ -1,12 +1,12 @@
 import { nanoid } from "nanoid";
 import {
     useFretClickContext,
-    useRenderedFrets,
+    useRenderedFretsContext,
     useTuningContext,
 } from "./MainContext";
 
 function Fretboard() {
-    const fretsToRender = useRenderedFrets();
+    const fretsToRender = useRenderedFretsContext();
     const tuning = useTuningContext();
     const frets = fretsToRender.map((string, stringNum) => {
         return (
