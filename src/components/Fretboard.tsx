@@ -23,36 +23,38 @@ function Fretboard() {
                     .map((cell: FretCell) => {
                         return (
                             <li key={nanoid()}>
-                                <Fret
-                                    cell={cell}
-                                    isInFretBoard={true}
-                                    highlight={
-                                        ringingStrings[stringNum] === cell.fret
-                                            ? "ringing"
-                                            : ""
-                                    }
-                                />
+                                {cell.fret !== 0 ? (
+                                    <Fret
+                                        cell={cell}
+                                        highlight={
+                                            ringingStrings[stringNum] ===
+                                            cell.fret
+                                                ? "ringing"
+                                                : ""
+                                        }
+                                    />
+                                ) : (
+                                    <Fret
+                                        cell={{
+                                            note: tuning[stringNum],
+                                            string: stringNum,
+                                            fret: 0,
+                                        }}
+                                        highlight={
+                                            ringingStrings[stringNum] ===
+                                            "muted"
+                                                ? "muted"
+                                                : ringingStrings[stringNum] ===
+                                                  0
+                                                ? "ringing"
+                                                : ""
+                                        }
+                                    />
+                                )}
                             </li>
                         );
                     })
                     .reverse()}
-                <li key={nanoid()}>
-                    <Fret
-                        cell={{
-                            note: tuning[stringNum],
-                            string: stringNum,
-                            fret: 0,
-                        }}
-                        isInFretBoard={false}
-                        highlight={
-                            ringingStrings[stringNum] === "muted"
-                                ? "muted"
-                                : ringingStrings[stringNum] === 0
-                                ? "ringing"
-                                : ""
-                        }
-                    />
-                </li>
             </ul>
         );
     });
