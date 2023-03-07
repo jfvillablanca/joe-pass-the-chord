@@ -60,6 +60,15 @@ export function MainContext({ children }: { children: React.ReactNode }) {
                 return stringNumber === cell.string ? cell.fret : stringValue;
             });
         });
+
+        setChordTones((prevChordTones) => {
+            return prevChordTones.map((chordTone, stringNumber) => {
+                if (chordTone === cell.note && stringNumber === cell.string) {
+                    return "";
+                }
+                return stringNumber === cell.string ? cell.note : chordTone;
+            });
+        });
     };
 
     return (
