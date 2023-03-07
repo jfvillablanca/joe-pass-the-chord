@@ -5,6 +5,7 @@ import { transpose as transposeNote } from "@tonaljs/note";
 const TuningContext = createContext<string[]>([]);
 const RenderedFretsContext = createContext<FretCell[][]>([]);
 const FretClickContext = createContext<(cell: FretCell) => void>(() => {});
+const FingeredStringContext = createContext<FingeredString[]>([]);
 
 export function useFretClickContext() {
     return useContext(FretClickContext);
@@ -18,11 +19,17 @@ export function useRenderedFretsContext() {
     return useContext(RenderedFretsContext);
 }
 
+export function useFingeredStringContext() {
+    return useContext(FingeredStringContext);
+}
+
 export type FretCell = {
     note: string;
     string: number;
     fret: number;
 };
+
+export type FingeredString = number | "muted";
 
 export function MainContext({ children }: { children: React.ReactNode }) {
     const tuning = ["E", "A", "D", "G", "B", "E"];
@@ -66,7 +73,9 @@ export function MainContext({ children }: { children: React.ReactNode }) {
         <TuningContext.Provider value={tuning}>
             <RenderedFretsContext.Provider value={renderedFrets}>
                 <FretClickContext.Provider value={handleFretClick}>
-                    {children}
+                    <FingeredStringContext.Provider value={fingeredStrings}>
+                        {children}
+                    </FingeredStringContext.Provider>
                 </FretClickContext.Provider>
             </RenderedFretsContext.Provider>
         </TuningContext.Provider>
