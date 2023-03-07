@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import { fromSemitones } from "@tonaljs/interval";
-import { transpose } from "@tonaljs/note";
+import { fromSemitones as semitonesToNote } from "@tonaljs/interval";
+import { transpose as transposeNote } from "@tonaljs/note";
 
 const TuningContext = createContext<string[]>([]);
 const RenderedFretsContext = createContext<FretCell[][]>([]);
@@ -20,22 +20,27 @@ export function useRenderedFretsContext() {
 
 export type FretCell = {
     note: string;
-    stringNumber: number;
-    fretNumber: number;
+    string: number;
+    fret: number;
 };
 
 export function MainContext({ children }: { children: React.ReactNode }) {
+    const tuning = ["E", "A", "D", "G", "B", "E"];
+    const numberOfFrets = 5;
+
     const computeRenderedFrets = () => {
-        return tuning.map((openStringNote, stringNumber) => {
-            return Array.from({ length: noOfFrets })
+        return tuning.map((openStringNote, string) => {
+            return Array.from({ length: numberOfFrets })
                 .map((_, fretOffset) => {
+                    const note = transposeNote(
+                        openStringNote,
+                        semitonesToNote(lowestRenderedFretNum + fretOffset)
+                    );
+                    const fret = lowestRenderedFretNum + fretOffset;
                     const fretCell: FretCell = {
-                        note: transpose(
-                            openStringNote,
-                            fromSemitones(lowestRenderedFretNum + fretOffset)
-                        ),
-                        stringNumber: stringNumber,
-                        fretNumber: lowestRenderedFretNum + fretOffset,
+                        note,
+                        string,
+                        fret,
                     };
                     return fretCell;
                 })
@@ -45,7 +50,7 @@ export function MainContext({ children }: { children: React.ReactNode }) {
 
     const initializeRingingNotes = () => {
         return tuning.map(() => {
-            return Array.from({ length: noOfFrets })
+            return Array.from({ length: numberOfFrets })
                 .map(() => {
                     return 0;
                 })
@@ -53,8 +58,6 @@ export function MainContext({ children }: { children: React.ReactNode }) {
         });
     };
 
-    const tuning = ["E", "A", "D", "G", "B", "E"];
-    const noOfFrets = 5;
     const [lowestRenderedFretNum, setLowestRenderedFretNum] = useState(1);
     const [renderedFrets, setRenderedFrets] = useState(computeRenderedFrets());
     const [ringingNotes, setRingingNotes] = useState(initializeRingingNotes());

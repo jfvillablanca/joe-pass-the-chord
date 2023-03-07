@@ -9,10 +9,10 @@ import {
 function Fretboard() {
     const fretsToRender = useRenderedFretsContext();
     const tuning = useTuningContext();
-    const frets = fretsToRender.map((string, stringNum) => {
+    const frets = fretsToRender.map((string: FretCell[], stringNum: number) => {
         return (
             <ul className='flex' key={nanoid()}>
-                {string.map((cell) => {
+                {string.map((cell: FretCell) => {
                     return (
                         <li key={nanoid()}>
                             <Fret cell={cell} isInFretBoard={true} />
@@ -20,7 +20,14 @@ function Fretboard() {
                     );
                 })}
                 <li key={nanoid()}>
-                    <Fret cell={{note: tuning[stringNum], stringNumber: stringNum, fretNumber: 0}} isInFretBoard={false} />
+                    <Fret
+                        cell={{
+                            note: tuning[stringNum],
+                            string: stringNum,
+                            fret: 0,
+                        }}
+                        isInFretBoard={false}
+                    />
                 </li>
             </ul>
         );
@@ -40,7 +47,9 @@ function Fret({
 }) {
     const handleFretClick = useFretClickContext();
 
-    const style = isInFretBoard ? "border borderinc-200 w-8 h-8" : "border rounded-full w-8 h-8 ml-2";
+    const style = isInFretBoard
+        ? "border borderinc-200 w-8 h-8"
+        : "border rounded-full w-8 h-8 ml-2";
 
     return (
         <button className={style} onClick={() => handleFretClick(cell)}>
