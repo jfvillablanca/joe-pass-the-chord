@@ -16,6 +16,10 @@ function Fretboard() {
         ...cell,
     ]);
 
+    const fretboardNumbers = notesToRender[0]
+        .map((cell) => cell.fret)
+        .reverse();
+
     const frets = notesToRender.map((string: FretCell[], stringNum: number) => {
         return (
             <ul className='flex' key={nanoid()}>
@@ -40,12 +44,30 @@ function Fretboard() {
         );
     });
 
-    return <main>{frets}</main>;
+    return (
+        <main>
+            <FretNumbers fretboardNumbers={fretboardNumbers} />
+            {frets}
+        </main>
+    );
 }
 
 export default Fretboard;
 
-const fretWidth = 'w-8';
+const fretWidth = "w-8";
+
+function FretNumbers({ fretboardNumbers }: { fretboardNumbers: number[] }) {
+    const landmarkFretNumbers = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
+    const fretNumbers = fretboardNumbers.map((fretNumber) => {
+        return (
+            <li className={`${fretWidth}`} key={nanoid()}>
+                {landmarkFretNumbers.includes(fretNumber) ? fretNumber : " "}
+            </li>
+        );
+    });
+
+    return <ul className='flex'>{fretNumbers}</ul>;
+}
 
 function Fret({
     cell,
