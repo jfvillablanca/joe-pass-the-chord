@@ -15,8 +15,8 @@ export function MainContext({ children }: { children: React.ReactNode }) {
 
     const computeRenderedFrets = () => {
         return tuning.map((openStringNote, string) => {
-            return Array.from({ length: numberOfFrets })
-                .map((_, fretOffset) => {
+            return Array.from({ length: numberOfFrets }).map(
+                (_, fretOffset) => {
                     const note = transposeNote(
                         openStringNote,
                         semitonesToNote(lowestRenderedFretNum + fretOffset)
@@ -28,8 +28,8 @@ export function MainContext({ children }: { children: React.ReactNode }) {
                         fret,
                     };
                     return fretCell;
-                })
-                .reverse();
+                }
+            );
         });
     };
 

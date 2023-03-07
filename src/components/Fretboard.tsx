@@ -14,21 +14,23 @@ function Fretboard() {
     const frets = fretsToRender.map((string: FretCell[], stringNum: number) => {
         return (
             <ul className='flex' key={nanoid()}>
-                {string.map((cell: FretCell) => {
-                    return (
-                        <li key={nanoid()}>
-                            <Fret
-                                cell={cell}
-                                isInFretBoard={true}
-                                highlight={
-                                    ringingStrings[stringNum] === cell.fret
-                                        ? "ringing"
-                                        : ""
-                                }
-                            />
-                        </li>
-                    );
-                })}
+                {string
+                    .map((cell: FretCell) => {
+                        return (
+                            <li key={nanoid()}>
+                                <Fret
+                                    cell={cell}
+                                    isInFretBoard={true}
+                                    highlight={
+                                        ringingStrings[stringNum] === cell.fret
+                                            ? "ringing"
+                                            : ""
+                                    }
+                                />
+                            </li>
+                        );
+                    })
+                    .reverse()}
                 <li key={nanoid()}>
                     <Fret
                         cell={{
