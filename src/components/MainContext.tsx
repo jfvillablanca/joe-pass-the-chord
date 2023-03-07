@@ -2,6 +2,7 @@ import { useState } from "react";
 import { fromSemitones as semitonesToNote } from "@tonaljs/interval";
 import { transpose as transposeNote } from "@tonaljs/note";
 import {
+    ChordTonesContext,
     FingeredStringContext,
     FretClickContext,
     RenderedFretsContext,
@@ -66,7 +67,9 @@ export function MainContext({ children }: { children: React.ReactNode }) {
             <RenderedFretsContext.Provider value={renderedFrets}>
                 <FretClickContext.Provider value={handleFretClick}>
                     <FingeredStringContext.Provider value={fingeredStrings}>
-                        {children}
+                        <ChordTonesContext.Provider value={chordTones}>
+                            {children}
+                        </ChordTonesContext.Provider>
                     </FingeredStringContext.Provider>
                 </FretClickContext.Provider>
             </RenderedFretsContext.Provider>
