@@ -3,7 +3,7 @@ import { fromSemitones as semitonesToNote } from "@tonaljs/interval";
 import { transpose as transposeNote } from "@tonaljs/note";
 import {
     ChordTonesContext,
-    FingeredStringContext,
+    FingeredFretContext,
     FretClickContext,
     RenderedFretsContext,
     TuningContext,
@@ -34,7 +34,7 @@ export function MainContext({ children }: { children: React.ReactNode }) {
         });
     };
 
-    const initializeFingeredStrings = () => {
+    const initializeFingeredFrets = () => {
         return tuning.map(() => "muted" as FingeredString);
     };
 
@@ -44,20 +44,20 @@ export function MainContext({ children }: { children: React.ReactNode }) {
 
     const [lowestRenderedFretNum, setLowestRenderedFretNum] = useState(1);
     const [renderedFrets, setRenderedFrets] = useState(computeRenderedFrets());
-    const [fingeredStrings, setFingeredStrings] = useState(
-        initializeFingeredStrings()
+    const [fingeredFrets, setFingeredFrets] = useState(
+        initializeFingeredFrets()
     );
     const [chordTones, setChordTones] = useState<string[]>(
         initializeChordTones()
     );
 
     const handleFretClick = (cell: FretCell) => {
-        setFingeredStrings((prevFingeredString) => {
-            return prevFingeredString.map((stringValue, stringNumber) => {
-                if (stringValue === cell.fret && stringNumber === cell.string) {
+        setFingeredFrets((prevFingeredFrets) => {
+            return prevFingeredFrets.map((fingeredFret, stringNumber) => {
+                if (fingeredFret === cell.fret && stringNumber === cell.string) {
                     return "muted";
                 }
-                return stringNumber === cell.string ? cell.fret : stringValue;
+                return stringNumber === cell.string ? cell.fret : fingeredFret;
             });
         });
 
@@ -75,11 +75,11 @@ export function MainContext({ children }: { children: React.ReactNode }) {
         <TuningContext.Provider value={tuning}>
             <RenderedFretsContext.Provider value={renderedFrets}>
                 <FretClickContext.Provider value={handleFretClick}>
-                    <FingeredStringContext.Provider value={fingeredStrings}>
+                    <FingeredFretContext.Provider value={fingeredFrets}>
                         <ChordTonesContext.Provider value={chordTones}>
                             {children}
                         </ChordTonesContext.Provider>
-                    </FingeredStringContext.Provider>
+                    </FingeredFretContext.Provider>
                 </FretClickContext.Provider>
             </RenderedFretsContext.Provider>
         </TuningContext.Provider>

@@ -6,7 +6,7 @@ export const RenderedFretsContext = createContext<FretCell[][]>([]);
 export const FretClickContext = createContext<(cell: FretCell) => void>(
     () => {}
 );
-export const FingeredStringContext = createContext<FingeredString[]>([]);
+export const FingeredFretContext = createContext<FingeredString[]>([]);
 export const ChordTonesContext = createContext<string[]>([]);
 
 export function useFretClickContext() {
@@ -21,8 +21,8 @@ export function useRenderedFretsContext() {
     return useContext(RenderedFretsContext);
 }
 
-export function useFingeredStringContext() {
-    return useContext(FingeredStringContext);
+export function useFingeredFretContext() {
+    return useContext(FingeredFretContext);
 }
 
 export function useChordTonesContext() {

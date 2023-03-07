@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { FretCell } from "../helpers/types";
 import {
-    useFingeredStringContext,
+    useFingeredFretContext,
     useFretClickContext,
     useRenderedFretsContext,
     useTuningContext,
@@ -9,7 +9,7 @@ import {
 
 function Fretboard() {
     const fretsToRender = useRenderedFretsContext();
-    const ringingStrings = useFingeredStringContext();
+    const fingeredFrets = useFingeredFretContext();
     const tuning = useTuningContext();
     const notesToRender = fretsToRender.map((cell: FretCell[], i) => [
         { note: tuning[i], string: i, fret: 0 },
@@ -22,9 +22,9 @@ function Fretboard() {
                 {string
                     .map((cell: FretCell) => {
                         const highlight =
-                            ringingStrings[stringNum] === cell.fret
+                            fingeredFrets[stringNum] === cell.fret
                                 ? "ringing"
-                                : ringingStrings[stringNum] === "muted" &&
+                                : fingeredFrets[stringNum] === "muted" &&
                                   cell.fret === 0
                                 ? "muted"
                                 : "";
