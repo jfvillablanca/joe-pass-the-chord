@@ -3,7 +3,7 @@ import { fromSemitones } from "@tonaljs/interval";
 import { transpose } from "@tonaljs/note";
 
 const TuningContext = createContext<string[]>([]);
-const RenderedFrets = createContext<string[][]>([]);
+const RenderedFretsContext = createContext<FretCell[][]>([]);
 const FretClickContext = createContext<(cell: FretCell) => void>(() => {});
 
 export function useFretClickContext() {
@@ -14,8 +14,8 @@ export function useTuningContext() {
     return useContext(TuningContext);
 }
 
-export function useRenderedFrets() {
-    return useContext(RenderedFrets);
+export function useRenderedFretsContext() {
+    return useContext(RenderedFretsContext);
 }
 
 export type FretCell = {
@@ -49,11 +49,11 @@ export function MainContext({ children }: { children: React.ReactNode }) {
 
     return (
         <TuningContext.Provider value={tuning}>
-            <RenderedFrets.Provider value={renderedFrets}>
+            <RenderedFretsContext.Provider value={renderedFrets}>
                 <FretClickContext.Provider value={handleFretClick}>
                     {children}
                 </FretClickContext.Provider>
-            </RenderedFrets.Provider>
+            </RenderedFretsContext.Provider>
         </TuningContext.Provider>
     );
 }
