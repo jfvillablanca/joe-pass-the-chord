@@ -1,12 +1,11 @@
 import { nanoid } from "nanoid";
+import { FretCell } from "../helpers/types";
 import {
-    FingeredString,
-    FretCell,
     useFingeredStringContext,
     useFretClickContext,
     useRenderedFretsContext,
     useTuningContext,
-} from "./MainContext";
+} from "../helpers/contexthooks";
 
 function Fretboard() {
     const fretsToRender = useRenderedFretsContext();

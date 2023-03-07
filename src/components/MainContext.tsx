@@ -1,35 +1,13 @@
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 import { fromSemitones as semitonesToNote } from "@tonaljs/interval";
 import { transpose as transposeNote } from "@tonaljs/note";
-
-const TuningContext = createContext<string[]>([]);
-const RenderedFretsContext = createContext<FretCell[][]>([]);
-const FretClickContext = createContext<(cell: FretCell) => void>(() => {});
-const FingeredStringContext = createContext<FingeredString[]>([]);
-
-export function useFretClickContext() {
-    return useContext(FretClickContext);
-}
-
-export function useTuningContext() {
-    return useContext(TuningContext);
-}
-
-export function useRenderedFretsContext() {
-    return useContext(RenderedFretsContext);
-}
-
-export function useFingeredStringContext() {
-    return useContext(FingeredStringContext);
-}
-
-export type FretCell = {
-    note: string;
-    string: number;
-    fret: number;
-};
-
-export type FingeredString = number | "muted";
+import {
+    FingeredStringContext,
+    FretClickContext,
+    RenderedFretsContext,
+    TuningContext,
+} from "../helpers/contexthooks";
+import { FingeredString, FretCell } from "../helpers/types";
 
 export function MainContext({ children }: { children: React.ReactNode }) {
     const tuning = ["E", "A", "D", "G", "B", "E"];
