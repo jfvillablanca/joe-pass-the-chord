@@ -57,6 +57,7 @@ export default Fretboard;
 const fretWidth = "w-8";
 
 function FretNumbers({ fretboardNumbers }: { fretboardNumbers: number[] }) {
+    // NOTE: Assumption: highest fret num is 24
     const landmarkFretNumbers = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
     const fretNumbers = fretboardNumbers.map((fretNumber) => {
         return (
