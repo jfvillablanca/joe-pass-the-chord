@@ -2,9 +2,9 @@ import { createContext, useContext, useState } from "react";
 import { fromSemitones } from "@tonaljs/interval";
 import { transpose } from "@tonaljs/note";
 
-const FretClickContext = createContext<(note: string) => void>(() => {});
 const TuningContext = createContext<string[]>([]);
 const RenderedFrets = createContext<string[][]>([]);
+const FretClickContext = createContext<(cell: FretCell) => void>(() => {});
 
 export function useFretClickContext() {
     return useContext(FretClickContext);
@@ -43,8 +43,8 @@ export function MainContext({ children }: { children: React.ReactNode }) {
     const [lowestRenderedFretNum, setLowestRenderedFretNum] = useState(1);
     const [renderedFrets, setRenderedFrets] = useState(computeRenderedFrets());
 
-    const handleFretClick = (note: string) => {
-        console.log(note);
+    const handleFretClick = (cell: FretCell) => {
+        console.log(cell);
     };
 
     return (
