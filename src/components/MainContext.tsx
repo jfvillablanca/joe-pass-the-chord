@@ -66,7 +66,11 @@ export function MainContext({ children }: { children: React.ReactNode }) {
     );
 
     const handleFretClick = (cell: FretCell) => {
-        console.log(cell);
+        setFingeredStrings((prevFingeredString) => {
+            return prevFingeredString.map((string, stringNumber) => {
+                return stringNumber === cell.string ? cell.fret : string;
+            });
+        });
     };
 
     return (
