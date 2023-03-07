@@ -18,6 +18,12 @@ export function useRenderedFrets() {
     return useContext(RenderedFrets);
 }
 
+export type FretCell = {
+    note: string;
+    stringNumber: number;
+    fretNumber: number;
+}
+
 export function MainContext({ children }: { children: React.ReactNode }) {
     const computeRenderedFrets = () => {
         return tuning.map((openStringNote) => {
