@@ -43,16 +43,21 @@ export default Fretboard;
 
 function Fret({
     cell,
+    highlight,
     isInFretBoard,
 }: {
     cell: FretCell;
+    highlight: "ringing" | "muted" | "";
     isInFretBoard: boolean;
 }) {
     const handleFretClick = useFretClickContext();
 
+    const mutedStyle = highlight === "muted" ? "bg-red-300" : "";
+    const ringingStyle = highlight === "ringing" ? "bg-green-300" : "";
+
     const style = isInFretBoard
-        ? "border borderinc-200 w-8 h-8"
-        : "border rounded-full w-8 h-8 ml-2";
+        ? `border borderinc-200 w-8 h-8 ${ringingStyle}`
+        : `border rounded-full w-8 h-8 ml-2 ${ringingStyle} ${mutedStyle}`;
 
     return (
         <button className={style} onClick={() => handleFretClick(cell)}>
