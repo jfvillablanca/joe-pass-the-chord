@@ -11,7 +11,12 @@ function Fretboard() {
     const fretsToRender = useRenderedFretsContext();
     const ringingStrings = useFingeredStringContext();
     const tuning = useTuningContext();
-    const frets = fretsToRender.map((string: FretCell[], stringNum: number) => {
+    const notesToRender = fretsToRender.map((cell: FretCell[], i) => [
+        { note: tuning[i], string: i, fret: 0 },
+        ...cell,
+    ]);
+
+    const frets = notesToRender.map((string: FretCell[], stringNum: number) => {
         return (
             <ul className='flex' key={nanoid()}>
                 {string
