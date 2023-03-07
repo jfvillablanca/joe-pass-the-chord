@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fromSemitones as semitonesToNote } from "@tonaljs/interval";
 import { transpose as transposeNote } from "@tonaljs/note";
 import {
@@ -17,7 +17,7 @@ export function MainContext({ children }: { children: React.ReactNode }) {
     const numberOfFrets = 5;
     const highestFretNum = 24;
 
-    const computeRenderedFrets = () => {
+    const computeRenderedFrets = (lowestRenderedFretNum: number) => {
         return tuning.map((openStringNote, string) => {
             return Array.from({ length: numberOfFrets }).map(
                 (_, fretOffset) => {
@@ -46,7 +46,9 @@ export function MainContext({ children }: { children: React.ReactNode }) {
     };
 
     const [lowestRenderedFretNum, setLowestRenderedFretNum] = useState(1);
-    const [renderedFrets, setRenderedFrets] = useState(computeRenderedFrets());
+    const [renderedFrets, setRenderedFrets] = useState(
+        computeRenderedFrets(lowestRenderedFretNum)
+    );
     const [fingeredFrets, setFingeredFrets] = useState(
         initializeFingeredFrets()
     );
@@ -88,6 +90,11 @@ export function MainContext({ children }: { children: React.ReactNode }) {
                 : newLowestRenderedFretNum;
         });
     };
+
+    useEffect(() => {
+        // NOTE: Not sure if this is the idiomatic way to do it.
+        setRenderedFrets(computeRenderedFrets(lowestRenderedFretNum));
+    }, [lowestRenderedFretNum]);
 
     return (
         <TuningContext.Provider value={tuning}>
