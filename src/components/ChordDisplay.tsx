@@ -1,3 +1,9 @@
+import { useChordTonesContext } from "../helpers/contexthooks";
+import { detect } from "@tonaljs/chord-detect";
+
 export default function ChordDisplay() {
-    return <div>hello</div>;
+    const chordPredictions = detect(useChordTonesContext(), {
+        assumePerfectFifth: true,
+    });
+    return <div>{chordPredictions[0]}</div>;
 }
