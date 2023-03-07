@@ -1,3 +1,5 @@
+import { useFretScrollContext } from "../helpers/contexthooks";
+
 export default function FretScroll({
     children,
 }: {
@@ -13,5 +15,8 @@ export default function FretScroll({
 }
 
 function ScrollButton({ direction }: { direction: "higher" | "lower" }) {
-    return <button>{direction}</button>;
+    const handleFretScroll = useFretScrollContext();
+    return (
+        <button onClick={() => handleFretScroll(direction)}>{direction}</button>
+    );
 }
