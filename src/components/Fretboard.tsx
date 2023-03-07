@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import {
+    FretCell,
     useFretClickContext,
     useRenderedFretsContext,
     useTuningContext,
@@ -11,15 +12,15 @@ function Fretboard() {
     const frets = fretsToRender.map((string, stringNum) => {
         return (
             <ul className='flex' key={nanoid()}>
-                {string.map((fretNote) => {
+                {string.map((cell) => {
                     return (
                         <li key={nanoid()}>
-                            <Fret note={fretNote} isInFretBoard={true} />
+                            <Fret cell={cell} isInFretBoard={true} />
                         </li>
                     );
                 })}
                 <li key={nanoid()}>
-                    <Fret note={tuning[stringNum]} isInFretBoard={false} />
+                    <Fret cell={{note: tuning[stringNum], stringNumber: stringNum, fretNumber: 0}} isInFretBoard={false} />
                 </li>
             </ul>
         );
@@ -31,10 +32,10 @@ function Fretboard() {
 export default Fretboard;
 
 function Fret({
-    note,
+    cell,
     isInFretBoard,
 }: {
-    note: string;
+    cell: FretCell;
     isInFretBoard: boolean;
 }) {
     const handleFretClick = useFretClickContext();
@@ -42,8 +43,8 @@ function Fret({
     const style = isInFretBoard ? "border borderinc-200 w-8 h-8" : "border rounded-full w-8 h-8 ml-2";
 
     return (
-        <button className={style} onClick={() => handleFretClick(note)}>
-            {note}
+        <button className={style} onClick={() => handleFretClick(cell)}>
+            {cell.note}
         </button>
     );
 }
