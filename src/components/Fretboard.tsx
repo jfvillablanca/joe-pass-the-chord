@@ -18,7 +18,15 @@ function Fretboard() {
                 {string.map((cell: FretCell) => {
                     return (
                         <li key={nanoid()}>
-                            <Fret cell={cell} isInFretBoard={true} />
+                            <Fret
+                                cell={cell}
+                                isInFretBoard={true}
+                                highlight={
+                                    ringingStrings[stringNum] === cell.fret
+                                        ? "ringing"
+                                        : ""
+                                }
+                            />
                         </li>
                     );
                 })}
@@ -30,6 +38,13 @@ function Fretboard() {
                             fret: 0,
                         }}
                         isInFretBoard={false}
+                        highlight={
+                            ringingStrings[stringNum] === "muted"
+                                ? "muted"
+                                : ringingStrings[stringNum] === 0
+                                ? "ringing"
+                                : ""
+                        }
                     />
                 </li>
             </ul>
