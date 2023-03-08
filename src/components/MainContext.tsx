@@ -10,7 +10,7 @@ import {
     RenderedFretsContext,
     TuningContext,
 } from "../helpers/contexthooks";
-import { FingeredString, FretCell } from "../helpers/types";
+import { FingeredFret, FretCell } from "../helpers/types";
 
 export function MainContext({ children }: { children: React.ReactNode }) {
     // NOTE: tuning and no of frets cound could become state
