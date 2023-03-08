@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { fromSemitones as semitonesToNote } from "@tonaljs/interval";
-import { transpose as transposeNote } from "@tonaljs/note";
+import {
+    transpose as transposeNote,
+    simplify,
+} from "@tonaljs/note";
 import {
     ChordTonesContext,
     FingeredFretContext,
@@ -93,6 +96,31 @@ export function MainContext({ children }: { children: React.ReactNode }) {
             return newLowestRenderedFretNum > highestFretNum - numberOfFrets + 1
                 ? highestFretNum - numberOfFrets + 1
                 : newLowestRenderedFretNum;
+        });
+
+        setFingeredFrets((prevFingeredFrets) => {
+            const transposedNote = (note: string, transposeValue: number) =>
+                simplify(transposeNote(note, semitonesToNote(transposeValue)));
+
+            return prevFingeredFrets.map((fingeredFret) => {
+                if (fingeredFret === "muted") {
+                    return "muted";
+                } else if (fingeredFret.relativeFret === 0) {
+                    return { ...fingeredFret, relativeFret: 0 };
+                } else {
+                    return direction === "higher"
+                        ? {
+                              ...fingeredFret,
+                              note: transposedNote(fingeredFret.note, 1),
+                              relativeFret: fingeredFret.relativeFret + 1,
+                          }
+                        : {
+                              ...fingeredFret,
+                              note: transposedNote(fingeredFret.note, -1),
+                              relativeFret: fingeredFret.relativeFret - 1,
+                          };
+                }
+            });
         });
     };
 
