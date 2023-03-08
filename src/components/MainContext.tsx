@@ -112,12 +112,10 @@ export function MainContext({ children }: { children: React.ReactNode }) {
                         ? {
                               ...fingeredFret,
                               note: transposedNote(fingeredFret.note, 1),
-                              relativeFret: fingeredFret.relativeFret + 1,
                           }
                         : {
                               ...fingeredFret,
                               note: transposedNote(fingeredFret.note, -1),
-                              relativeFret: fingeredFret.relativeFret - 1,
                           };
                 }
             });
