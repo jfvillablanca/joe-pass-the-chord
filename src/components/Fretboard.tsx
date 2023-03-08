@@ -25,11 +25,12 @@ function Fretboard() {
             <ul className='flex' key={nanoid()}>
                 {string
                     .map((cell: FretCell) => {
+                        const fingeredFret = fingeredFrets[stringNum];
                         const highlight =
-                            fingeredFrets[stringNum] === cell.fret
+                            fingeredFret !== "muted" &&
+                            fingeredFret.relativeFret === cell.fret
                                 ? "ringing"
-                                : fingeredFrets[stringNum] === "muted" &&
-                                  cell.fret === 0
+                                : fingeredFret === "muted" && cell.fret === 0
                                 ? "muted"
                                 : "";
 
