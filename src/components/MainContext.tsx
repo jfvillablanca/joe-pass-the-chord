@@ -51,12 +51,6 @@ export function MainContext({ children }: { children: React.ReactNode }) {
     const [fingeredFrets, setFingeredFrets] = useState(
         initializeFingeredFrets()
     );
-    const [renderedFrets, setRenderedFrets] = useState(
-        computeRenderedFrets(tuning, fretOffset)
-    );
-    const [chordTones, setChordTones] = useState<string[]>(
-        computeChordTones(fingeredFrets)
-    );
 
     const handleFretClick = (cell: FretCell) => {
         setFingeredFrets((prevFingeredFrets) => {
@@ -115,24 +109,18 @@ export function MainContext({ children }: { children: React.ReactNode }) {
         });
     };
 
-    useEffect(() => {
-        // NOTE: Not sure if this is the idiomatic way to do it.
-        setChordTones(computeChordTones(fingeredFrets));
-    }, [fingeredFrets]);
-
-    useEffect(() => {
-        // NOTE: Not sure if this is the idiomatic way to do it.
-        setRenderedFrets(computeRenderedFrets(tuning, fretOffset));
-    }, [fretOffset]);
-
     return (
         <TuningContext.Provider value={tuning}>
-            <RenderedFretsContext.Provider value={renderedFrets}>
+            <RenderedFretsContext.Provider
+                value={computeRenderedFrets(tuning, fretOffset)}
+            >
                 <FretOffsetContext.Provider value={fretOffset}>
                     <FretScrollContext.Provider value={handleFretScroll}>
                         <FretClickContext.Provider value={handleFretClick}>
                             <FingeredFretContext.Provider value={fingeredFrets}>
-                                <ChordTonesContext.Provider value={chordTones}>
+                                <ChordTonesContext.Provider
+                                    value={computeChordTones(fingeredFrets)}
+                                >
                                     {children}
                                 </ChordTonesContext.Provider>
                             </FingeredFretContext.Provider>
