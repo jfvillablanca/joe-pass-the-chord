@@ -65,23 +65,18 @@ export function MainContext({ children }: { children: React.ReactNode }) {
 
     const handleFretClick = (cell: FretCell) => {
         setFingeredFrets((prevFingeredFrets) => {
+            const relativeFingeredFret = cell.fret - lowestRenderedFretNum + 1;
             return prevFingeredFrets.map((fingeredFret, stringNumber) => {
                 if (
-                    fingeredFret === cell.fret &&
+                    fingeredFret !== "muted" &&
+                    fingeredFret.relativeFret === relativeFingeredFret &&
                     stringNumber === cell.string
                 ) {
                     return "muted";
                 }
-                return stringNumber === cell.string ? cell.fret : fingeredFret;
-            });
-        });
-
-        setChordTones((prevChordTones) => {
-            return prevChordTones.map((chordTone, stringNumber) => {
-                if (chordTone === cell.note && stringNumber === cell.string) {
-                    return "";
-                }
-                return stringNumber === cell.string ? cell.note : chordTone;
+                return stringNumber === cell.string
+                    ? { note: cell.note, relativeFret: relativeFingeredFret }
+                    : fingeredFret;
             });
         });
     };
@@ -100,6 +95,11 @@ export function MainContext({ children }: { children: React.ReactNode }) {
                 : newLowestRenderedFretNum;
         });
     };
+
+    useEffect(() => {
+        // NOTE: Not sure if this is the idiomatic way to do it.
+        setChordTones(computeChordTones(fingeredFrets));
+    }, [fingeredFrets]);
 
     useEffect(() => {
         // NOTE: Not sure if this is the idiomatic way to do it.
