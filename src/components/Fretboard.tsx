@@ -3,7 +3,7 @@ import { FretCell } from "../helpers/types";
 import {
     useFingeredFretContext,
     useFretClickContext,
-    useLowestFretScrollContext,
+    useFretOffsetContext,
     useRenderedFretsContext,
     useTuningContext,
 } from "../helpers/contexthooks";
@@ -11,7 +11,7 @@ import {
 function Fretboard() {
     const fretsToRender = useRenderedFretsContext();
     const fingeredFrets = useFingeredFretContext();
-    const fretOffset = useLowestFretScrollContext();
+    const fretOffset = useFretOffsetContext();
     const tuning = useTuningContext();
     const notesToRender = fretsToRender.map((cell: FretCell[], i) => [
         { note: tuning[i], string: i, fret: 0 },

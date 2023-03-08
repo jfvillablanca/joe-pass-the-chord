@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import { fromSemitones as semitonesToNote } from "@tonaljs/interval";
-import {
-    transpose as transposeNote,
-    simplify,
-} from "@tonaljs/note";
+import { transpose as transposeNote, simplify } from "@tonaljs/note";
 import {
     ChordTonesContext,
     FingeredFretContext,
     FretClickContext,
     FretScrollContext,
-    LowestFretScrollContext,
+    FretOffsetContext,
     RenderedFretsContext,
     TuningContext,
 } from "../helpers/contexthooks";
@@ -22,26 +19,21 @@ export function MainContext({ children }: { children: React.ReactNode }) {
     const numberOfFrets = 5;
     const highestFretNum = 24;
 
-    const computeRenderedFrets = (
-        tuning: string[],
-        lowestRenderedFretNum: number
-    ) => {
+    const computeRenderedFrets = (tuning: string[], fretOffset: number) => {
         return tuning.map((openStringNote, string) => {
-            return Array.from({ length: numberOfFrets }).map(
-                (_, fretOffset) => {
-                    const note = transposeNote(
-                        openStringNote,
-                        semitonesToNote(lowestRenderedFretNum + fretOffset)
-                    );
-                    const fret = lowestRenderedFretNum + fretOffset;
-                    const fretCell: FretCell = {
-                        note,
-                        string,
-                        fret,
-                    };
-                    return fretCell;
-                }
-            );
+            return Array.from({ length: numberOfFrets }).map((_, fretIndex) => {
+                const note = transposeNote(
+                    openStringNote,
+                    semitonesToNote(fretOffset + fretIndex)
+                );
+                const fret = fretOffset + fretIndex;
+                const fretCell: FretCell = {
+                    note,
+                    string,
+                    fret,
+                };
+                return fretCell;
+            });
         });
     };
 
@@ -55,12 +47,12 @@ export function MainContext({ children }: { children: React.ReactNode }) {
         return tuning.map(() => "muted" as FingeredFret);
     };
 
-    const [lowestRenderedFretNum, setLowestRenderedFretNum] = useState(1);
+    const [fretOffset, setFretOffset] = useState(1);
     const [fingeredFrets, setFingeredFrets] = useState(
         initializeFingeredFrets()
     );
     const [renderedFrets, setRenderedFrets] = useState(
-        computeRenderedFrets(tuning, lowestRenderedFretNum)
+        computeRenderedFrets(tuning, fretOffset)
     );
     const [chordTones, setChordTones] = useState<string[]>(
         computeChordTones(fingeredFrets)
@@ -68,7 +60,7 @@ export function MainContext({ children }: { children: React.ReactNode }) {
 
     const handleFretClick = (cell: FretCell) => {
         setFingeredFrets((prevFingeredFrets) => {
-            const relativeFingeredFret = cell.fret - lowestRenderedFretNum + 1;
+            const relativeFingeredFret = cell.fret - fretOffset + 1;
             return prevFingeredFrets.map((fingeredFret, stringNumber) => {
                 if (
                     fingeredFret !== "muted" &&
@@ -85,17 +77,15 @@ export function MainContext({ children }: { children: React.ReactNode }) {
     };
 
     const handleFretScroll = (direction: "higher" | "lower") => {
-        setLowestRenderedFretNum((prevLowestRenderedFretNum) => {
+        setFretOffset((prevFretOffset) => {
             if (direction === "lower") {
-                const newLowestRenderedFretNum = prevLowestRenderedFretNum - 1;
-                return newLowestRenderedFretNum < 1
-                    ? 1
-                    : newLowestRenderedFretNum;
+                const newFretOffset = prevFretOffset - 1;
+                return newFretOffset < 1 ? 1 : newFretOffset;
             }
-            const newLowestRenderedFretNum = prevLowestRenderedFretNum + 1;
-            return newLowestRenderedFretNum > highestFretNum - numberOfFrets + 1
+            const newFretOffset = prevFretOffset + 1;
+            return newFretOffset > highestFretNum - numberOfFrets + 1
                 ? highestFretNum - numberOfFrets + 1
-                : newLowestRenderedFretNum;
+                : newFretOffset;
         });
 
         setFingeredFrets((prevFingeredFrets) => {
@@ -109,13 +99,12 @@ export function MainContext({ children }: { children: React.ReactNode }) {
                     return { ...fingeredFret, relativeFret: 0 };
                 } else {
                     return direction === "higher" &&
-                        lowestRenderedFretNum <
-                            highestFretNum - numberOfFrets + 1
+                        fretOffset < highestFretNum - numberOfFrets + 1
                         ? {
                               ...fingeredFret,
                               note: transposedNote(fingeredFret.note, 1),
                           }
-                        : direction === "lower" && lowestRenderedFretNum > 1
+                        : direction === "lower" && fretOffset > 1
                         ? {
                               ...fingeredFret,
                               note: transposedNote(fingeredFret.note, -1),
@@ -133,13 +122,13 @@ export function MainContext({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         // NOTE: Not sure if this is the idiomatic way to do it.
-        setRenderedFrets(computeRenderedFrets(tuning, lowestRenderedFretNum));
-    }, [lowestRenderedFretNum]);
+        setRenderedFrets(computeRenderedFrets(tuning, fretOffset));
+    }, [fretOffset]);
 
     return (
         <TuningContext.Provider value={tuning}>
             <RenderedFretsContext.Provider value={renderedFrets}>
-                <LowestFretScrollContext.Provider value={lowestRenderedFretNum}>
+                <FretOffsetContext.Provider value={fretOffset}>
                     <FretScrollContext.Provider value={handleFretScroll}>
                         <FretClickContext.Provider value={handleFretClick}>
                             <FingeredFretContext.Provider value={fingeredFrets}>
@@ -149,7 +138,7 @@ export function MainContext({ children }: { children: React.ReactNode }) {
                             </FingeredFretContext.Provider>
                         </FretClickContext.Provider>
                     </FretScrollContext.Provider>
-                </LowestFretScrollContext.Provider>
+                </FretOffsetContext.Provider>
             </RenderedFretsContext.Provider>
         </TuningContext.Provider>
     );
