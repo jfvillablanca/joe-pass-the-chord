@@ -4,4 +4,4 @@ export type FretCell = {
     fret: number;
 };
 
-export type FingeredString = number | "muted";
+export type FingeredFret = "muted" | { note: string, relativeFret: number };
