@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { fromSemitones as semitonesToNote } from "@tonaljs/interval";
 import { transpose as transposeNote, simplify } from "@tonaljs/note";
 import {
@@ -45,13 +45,9 @@ export function MainContext({ children }: { children: React.ReactNode }) {
         );
     };
 
-    const initializeFingeredFrets = () => {
-        return tuning.map(() => "muted" as FingeredFret);
-    };
-
     const [fretOffset, setFretOffset] = useState(1);
     const [fingeredFrets, setFingeredFrets] = useState(
-        initializeFingeredFrets()
+        tuning.map(() => "muted" as FingeredFret)
     );
 
     const handleFretClick = (cell: FretCell) => {
