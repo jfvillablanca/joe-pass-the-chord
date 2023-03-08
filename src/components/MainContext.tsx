@@ -42,12 +42,14 @@ export function MainContext({ children }: { children: React.ReactNode }) {
         });
     };
 
-    const initializeFingeredFrets = () => {
-        return tuning.map(() => "muted" as FingeredString);
+    const computeChordTones = (fingeredFrets: FingeredFret[]) => {
+        return fingeredFrets.map((fingeredFret) =>
+            fingeredFret === "muted" ? "" : fingeredFret.note
+        );
     };
 
-    const initializeChordTones = () => {
-        return tuning.map(() => "");
+    const initializeFingeredFrets = () => {
+        return tuning.map(() => "muted" as FingeredFret);
     };
 
     const [lowestRenderedFretNum, setLowestRenderedFretNum] = useState(1);
@@ -58,7 +60,7 @@ export function MainContext({ children }: { children: React.ReactNode }) {
         computeRenderedFrets(tuning, lowestRenderedFretNum)
     );
     const [chordTones, setChordTones] = useState<string[]>(
-        initializeChordTones()
+        computeChordTones(fingeredFrets)
     );
 
     const handleFretClick = (cell: FretCell) => {
