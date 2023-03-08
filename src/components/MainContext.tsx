@@ -108,15 +108,19 @@ export function MainContext({ children }: { children: React.ReactNode }) {
                 } else if (fingeredFret.relativeFret === 0) {
                     return { ...fingeredFret, relativeFret: 0 };
                 } else {
-                    return direction === "higher"
+                    return direction === "higher" &&
+                        lowestRenderedFretNum <
+                            highestFretNum - numberOfFrets + 1
                         ? {
                               ...fingeredFret,
                               note: transposedNote(fingeredFret.note, 1),
                           }
-                        : {
+                        : direction === "lower" && lowestRenderedFretNum > 1
+                        ? {
                               ...fingeredFret,
                               note: transposedNote(fingeredFret.note, -1),
-                          };
+                          }
+                        : fingeredFret;
                 }
             });
         });
