@@ -19,20 +19,22 @@ export function MainContext({ children }: { children: React.ReactNode }) {
     const numberOfFrets = 5;
     const highestFretNum = 24;
 
-    const computeRenderedFrets = (tuning: string[], fretOffset: number) => {
+    const computeRenderedFrets = (
+        tuning: string[],
+        fretOffset: number
+    ): FretCell[][] => {
         return tuning.map((openStringNote, string) => {
             return Array.from({ length: numberOfFrets }).map((_, fretIndex) => {
                 const note = transposeNote(
                     openStringNote,
                     semitonesToNote(fretOffset + fretIndex)
                 );
-                const fret = fretOffset + fretIndex;
-                const fretCell: FretCell = {
+                const absoluteFret = fretOffset + fretIndex;
+                return {
                     note,
                     string,
-                    fret,
+                    absoluteFret,
                 };
-                return fretCell;
             });
         });
     };
@@ -54,17 +56,17 @@ export function MainContext({ children }: { children: React.ReactNode }) {
 
     const handleFretClick = (cell: FretCell) => {
         setFingeredFrets((prevFingeredFrets) => {
-            const relativeFingeredFret = cell.fret - fretOffset + 1;
+            const normalizedFret = cell.absoluteFret - fretOffset + 1;
             return prevFingeredFrets.map((fingeredFret, stringNumber) => {
                 if (
                     fingeredFret !== "muted" &&
-                    fingeredFret.relativeFret === relativeFingeredFret &&
+                    fingeredFret.relativeFret === normalizedFret &&
                     stringNumber === cell.string
                 ) {
                     return "muted";
                 }
                 return stringNumber === cell.string
-                    ? { note: cell.note, relativeFret: relativeFingeredFret }
+                    ? { note: cell.note, relativeFret: normalizedFret }
                     : fingeredFret;
             });
         });

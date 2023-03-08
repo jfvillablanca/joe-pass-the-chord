@@ -14,12 +14,12 @@ function Fretboard() {
     const fretOffset = useFretOffsetContext();
     const tuning = useTuningContext();
     const notesToRender = fretsToRender.map((cell: FretCell[], i) => [
-        { note: tuning[i], string: i, fret: 0 },
+        { note: tuning[i], string: i, absoluteFret: 0 },
         ...cell,
     ]);
 
     const fretboardNumbers = notesToRender[0]
-        .map((cell) => cell.fret)
+        .map((cell) => cell.absoluteFret)
         .reverse();
 
     const frets = notesToRender.map((string: FretCell[], stringNum: number) => {
@@ -28,15 +28,15 @@ function Fretboard() {
                 {string
                     .map((cell: FretCell) => {
                         const fingeredFret = fingeredFrets[stringNum];
-                        const adjustedFret =
+                        const denormalizedFret =
                             fingeredFret !== "muted"
                                 ? fingeredFret.relativeFret + fretOffset - 1
                                 : 0;
 
                         const highlight =
-                            fingeredFret === "muted" && cell.fret === 0
+                            fingeredFret === "muted" && cell.absoluteFret === 0
                                 ? "muted"
-                                : adjustedFret === cell.fret
+                                : denormalizedFret === cell.absoluteFret
                                 ? "ringing"
                                 : "";
 
@@ -90,7 +90,7 @@ function Fret({
     const ringingStyle = highlight === "ringing" ? "bg-green-300" : "";
 
     const style =
-        cell.fret !== 0
+        cell.absoluteFret !== 0
             ? `border borderinc-200 ${fretWidth} h-8 ${ringingStyle}`
             : `border rounded-full ${fretWidth} h-8 ml-2 ${ringingStyle} ${mutedStyle}`;
 
