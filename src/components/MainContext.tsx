@@ -19,7 +19,10 @@ export function MainContext({ children }: { children: React.ReactNode }) {
     const numberOfFrets = 5;
     const highestFretNum = 24;
 
-    const computeRenderedFrets = (lowestRenderedFretNum: number) => {
+    const computeRenderedFrets = (
+        tuning: string[],
+        lowestRenderedFretNum: number
+    ) => {
         return tuning.map((openStringNote, string) => {
             return Array.from({ length: numberOfFrets }).map(
                 (_, fretOffset) => {
@@ -48,11 +51,11 @@ export function MainContext({ children }: { children: React.ReactNode }) {
     };
 
     const [lowestRenderedFretNum, setLowestRenderedFretNum] = useState(1);
-    const [renderedFrets, setRenderedFrets] = useState(
-        computeRenderedFrets(lowestRenderedFretNum)
-    );
     const [fingeredFrets, setFingeredFrets] = useState(
         initializeFingeredFrets()
+    );
+    const [renderedFrets, setRenderedFrets] = useState(
+        computeRenderedFrets(tuning, lowestRenderedFretNum)
     );
     const [chordTones, setChordTones] = useState<string[]>(
         initializeChordTones()
@@ -98,7 +101,7 @@ export function MainContext({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         // NOTE: Not sure if this is the idiomatic way to do it.
-        setRenderedFrets(computeRenderedFrets(lowestRenderedFretNum));
+        setRenderedFrets(computeRenderedFrets(tuning, lowestRenderedFretNum));
     }, [lowestRenderedFretNum]);
 
     return (
