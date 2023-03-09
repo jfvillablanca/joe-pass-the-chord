@@ -18,7 +18,7 @@ function Fretboard() {
         ...cell,
     ]);
 
-    const fretboardNumbers = notesToRender[0]
+    const fretboardNumbers = fretsToRender[0]
         .map((cell) => cell.absoluteFret)
         .reverse();
 
