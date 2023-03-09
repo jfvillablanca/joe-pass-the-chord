@@ -8,6 +8,8 @@ import {
     useTuningContext,
 } from "../helpers/contexthooks";
 
+const fret0Width = "2rem";
+
 function Fretboard() {
     const fretsToRender = useRenderedFretsContext();
     const fingeredFrets = useFingeredFretContext();
@@ -21,6 +23,11 @@ function Fretboard() {
     const fretboardNumbers = fretsToRender[0]
         .map((cell) => cell.absoluteFret)
         .reverse();
+    const fretWidths = calculateWidthPercentages(
+        fretboardNumbers.map((fretNumber) => calculateFretWidth(fretNumber))
+    )
+        .map((width) => `${width}%`)
+        .concat([fret0Width]);
 
     const frets = notesToRender.map((string: FretCell[], stringNum: number) => {
         return (
@@ -60,8 +67,6 @@ function Fretboard() {
 }
 
 export default Fretboard;
-
-const fretWidth = "w-8";
 
 function FretNumbers({ fretboardNumbers }: { fretboardNumbers: number[] }) {
     // NOTE: Assumption: highest fret num is 24
