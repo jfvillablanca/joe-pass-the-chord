@@ -22,7 +22,9 @@ function Fretboard() {
 
     const fretboardNumbers = fretsToRender[0].map((cell) => cell.absoluteFret);
     const fretWidths = calculateWidthPercentages(
-        fretboardNumbers.map((fretNumber) => calculateFretWidth(fretNumber))
+        fretboardNumbers
+            .reverse()
+            .map((fretNumber) => calculateFretWidth(fretNumber))
     )
         .map((width) => `${width}%`)
         .concat([fret0Width]);
@@ -55,8 +57,11 @@ function Fretboard() {
     });
 
     return (
-        <main>
-            <FretNumbers fretboardNumbers={fretboardNumbers} />
+        <main className='w-full mx-10'>
+            <FretNumbers
+                fretboardNumbers={fretboardNumbers.concat([0])}
+                fretWidths={fretWidths}
+            />
             {frets}
         </main>
     );
@@ -104,16 +109,19 @@ function Fret({
 
     const mutedStyle = highlight === "muted" ? "bg-red-300" : "";
     const ringingStyle = highlight === "ringing" ? "bg-green-300" : "";
+    const commonStyles = "border h-16 w-full";
 
-    const style =
+    const twStyles =
         cell.absoluteFret !== 0
-            ? `border borderinc-200 ${fretWidth} h-8 ${ringingStyle}`
-            : `border rounded-full ${fretWidth} h-8 ml-2 ${ringingStyle} ${mutedStyle}`;
+            ? `${commonStyles} ${ringingStyle}`
+            : `${commonStyles} rounded-full ml-2 ${ringingStyle} ${mutedStyle}`;
 
     return (
-        <button className={style} onClick={() => handleFretClick(cell)}>
+        <button className={twStyles} onClick={() => handleFretClick(cell)}>
             {cell.note}
         </button>
+    );
+}
 
 function calculateFretWidth(
     fretNumber: number,
