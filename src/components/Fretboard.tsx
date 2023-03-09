@@ -30,28 +30,26 @@ function Fretboard() {
     const frets = notesToRender.map((string: FretCell[], stringNum: number) => {
         return (
             <ul className='flex' key={nanoid()}>
-                {
-                    string.reverse().map((cell: FretCell, i) => {
-                        const fingeredFret = fingeredFrets[stringNum];
-                        const denormalizedFret =
-                            fingeredFret !== "muted"
-                                ? fingeredFret.relativeFret + fretOffset - 1
-                                : 0;
+                {string.reverse().map((cell: FretCell, i) => {
+                    const fingeredFret = fingeredFrets[stringNum];
+                    const denormalizedFret =
+                        fingeredFret !== "muted"
+                            ? fingeredFret.relativeFret + fretOffset - 1
+                            : 0;
 
-                        const highlight =
-                            fingeredFret === "muted" && cell.absoluteFret === 0
-                                ? "muted"
-                                : denormalizedFret === cell.absoluteFret
-                                ? "ringing"
-                                : "";
+                    const highlight =
+                        fingeredFret === "muted" && cell.absoluteFret === 0
+                            ? "muted"
+                            : denormalizedFret === cell.absoluteFret
+                            ? "ringing"
+                            : "";
 
-                        return (
-                            <li key={nanoid()}>
-                                <Fret cell={cell} highlight={highlight} />
-                            </li>
-                        );
-                    })
-                }
+                    return (
+                        <li key={nanoid()} style={{ width: fretWidths[i] }}>
+                            <Fret cell={cell} highlight={highlight} />
+                        </li>
+                    );
+                })}
             </ul>
         );
     });
