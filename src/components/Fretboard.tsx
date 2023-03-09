@@ -104,6 +104,16 @@ function Fret({
             {cell.note}
         </button>
 
+function calculateFretWidth(
+    fretNumber: number,
+    scaleLength: number = 66
+): number {
+    return (
+        scaleLength / 2 ** ((fretNumber - 1) / 12) -
+        scaleLength / 2 ** (fretNumber / 12)
+    );
+}
+
 function calculateWidthPercentages(absoluteWidth: number[]) {
     const totalWidth = absoluteWidth.reduce(
         (total, current) => total + current
