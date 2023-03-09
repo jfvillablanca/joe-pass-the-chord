@@ -98,5 +98,10 @@ function Fret({
         <button className={style} onClick={() => handleFretClick(cell)}>
             {cell.note}
         </button>
+
+function calculateWidthPercentages(absoluteWidth: number[]) {
+    const totalWidth = absoluteWidth.reduce(
+        (total, current) => total + current
     );
+    return absoluteWidth.map((fretWidth) => (fretWidth / totalWidth) * 100);
 }
