@@ -20,9 +20,7 @@ function Fretboard() {
         ...cell,
     ]);
 
-    const fretboardNumbers = fretsToRender[0]
-        .map((cell) => cell.absoluteFret)
-        .reverse();
+    const fretboardNumbers = fretsToRender[0].map((cell) => cell.absoluteFret);
     const fretWidths = calculateWidthPercentages(
         fretboardNumbers.map((fretNumber) => calculateFretWidth(fretNumber))
     )
@@ -32,8 +30,8 @@ function Fretboard() {
     const frets = notesToRender.map((string: FretCell[], stringNum: number) => {
         return (
             <ul className='flex' key={nanoid()}>
-                {string
-                    .map((cell: FretCell) => {
+                {
+                    string.reverse().map((cell: FretCell, i) => {
                         const fingeredFret = fingeredFrets[stringNum];
                         const denormalizedFret =
                             fingeredFret !== "muted"
@@ -53,7 +51,7 @@ function Fretboard() {
                             </li>
                         );
                     })
-                    .reverse()}
+                }
             </ul>
         );
     });
