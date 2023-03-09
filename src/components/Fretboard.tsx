@@ -68,13 +68,28 @@ function Fretboard() {
 
 export default Fretboard;
 
-function FretNumbers({ fretboardNumbers }: { fretboardNumbers: number[] }) {
+function FretNumbers({
+    fretboardNumbers,
+    fretWidths,
+}: {
+    fretboardNumbers: number[];
+    fretWidths: string[];
+}) {
     // NOTE: Assumption: highest fret num is 24
     const landmarkFretNumbers = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
-    const fretNumbers = fretboardNumbers.map((fretNumber) => {
+    const twStyles = (fretNumber: number) =>
+        `grid w-full justify-center ${fretNumber === 0 ? "ml-2" : ""}`;
+    const style = (fretWidth: string) => ({
+        width: `${fretWidth}`,
+    });
+    const fretNumbers = fretboardNumbers.map((fretNumber, i) => {
         return (
-            <li className={`${fretWidth}`} key={nanoid()}>
-                {landmarkFretNumbers.includes(fretNumber) ? fretNumber : " "}
+            <li style={style(fretWidths[i])} key={nanoid()}>
+                <p className={twStyles(fretNumber)}>
+                    {landmarkFretNumbers.includes(fretNumber)
+                        ? fretNumber
+                        : " "}
+                </p>
             </li>
         );
     });
