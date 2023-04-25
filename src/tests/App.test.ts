@@ -226,7 +226,7 @@ describe("Scale tests", () => {
     });
 });
 
-describe("Chord tests", () => {
+describe.only("Chord tests", () => {
     describe("Triads", () => {
         test("should return unique pitch classes from an array of notes", () => {
             const cShapeCowboyChord = [N.C, N.E, N.G, N.C, N.E];

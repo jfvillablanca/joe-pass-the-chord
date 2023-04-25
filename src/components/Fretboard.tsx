@@ -4,6 +4,7 @@ import {
     useFingeredFretContext,
     useFretClickContext,
     useFretOffsetContext,
+    useFretScrollContext,
     useRenderedFretsContext,
     useTuningContext,
 } from "../helpers/contexthooks";
@@ -28,6 +29,13 @@ function Fretboard() {
     )
         .map((width) => `${width}%`)
         .concat([fret0Width]);
+    console.log(fretWidths[0], [...fretWidths.slice(0,-1)][fretWidths.slice(0,-1).length - 1])
+
+    const fretboardStyles = {
+        // transform: `translateX(-${fretWidths[0]})`,
+        transform: `translateX(${[...fretWidths.slice(0,-1)][fretWidths.slice(0,-1).length - 1]})`,
+        // overflow: 'hidden',
+    }
 
     const frets = notesToRender.map((string: FretCell[], stringNum: number) => {
         return (
@@ -57,7 +65,7 @@ function Fretboard() {
     });
 
     return (
-        <main className='w-full mx-10'>
+        <main className='w-full mx-10' style={fretboardStyles}>
             <FretNumbers
                 fretboardNumbers={fretboardNumbers.concat([0])}
                 fretWidths={fretWidths}
