@@ -9,14 +9,15 @@ function App() {
     const [strings, setStrings] = useState([0, 0, 0, 0, 0, 0]);
     const [fretOffset, setFretOffset] = useState(0);
 
-    const fretsDisplayed = 3;
-    const frets = { from: fretOffset, amount: fretsDisplayed };
+    const fretsDisplayed = 4;
+    const adjustUpperFretLimit = UPPER_FRET_LIMIT - fretsDisplayed + 1;
+    const frets = { from: fretOffset, amount: fretsDisplayed - 1 };
 
     const handleFretOffsetAdjust = (offsetDirection: OffsetDirection) => {
         const [raisedFret, loweredFret] = [fretOffset + 1, fretOffset - 1];
         switch (offsetDirection) {
             case "up":
-                if (raisedFret <= UPPER_FRET_LIMIT) {
+                if (raisedFret <= adjustUpperFretLimit) {
                     setFretOffset(() => raisedFret);
                 }
                 break;
