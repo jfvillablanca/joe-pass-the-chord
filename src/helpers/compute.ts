@@ -1,12 +1,12 @@
 import { detect } from "@tonaljs/chord-detect";
 import { fromMidi, fromMidiSharps, get } from "@tonaljs/note";
 import { unzip } from "underscore";
-import { FingeredNotes } from "./types";
+import { FingeredNotesType } from "./types";
 
 function computeFingeredNotes(
     strings: number[],
     tuning: number[]
-): FingeredNotes {
+): FingeredNotesType {
     const noteNames: string[][] = unzip(
         strings
             .map((fret, string) => {

@@ -1,15 +1,15 @@
 import Left from "../assets/left.svg";
 import Right from "../assets/right.svg";
-import { ArrowDirection, OffsetDirection } from "../helpers/types";
+import { ArrowDirectionType, OffsetDirectionType } from "../helpers/types";
 
 function Arrow({
     direction,
     className: classFromApp = "",
     handleFretOffsetAdjust,
 }: {
-    direction: ArrowDirection;
+    direction: ArrowDirectionType;
     className?: string;
-    handleFretOffsetAdjust: (offsetDirection: OffsetDirection) => void;
+    handleFretOffsetAdjust: (offsetDirection: OffsetDirectionType) => void;
 }) {
     // non-lefty orientation
     const offsetDirection = direction === "left" ? "down" : "up";

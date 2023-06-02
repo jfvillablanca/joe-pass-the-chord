@@ -11,11 +11,11 @@ export type StateContextType = {
     setFretOffset: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export type ArrowDirection = "left" | "right";
+export type ArrowDirectionType = "left" | "right";
 
-export type OffsetDirection = "up" | "down";
+export type OffsetDirectionType = "up" | "down";
 
-export type FingeredNotes = {
+export type FingeredNotesType = {
     noteNames: string[][];
     chordNames: string[][];
 };
