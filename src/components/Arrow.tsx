@@ -2,7 +2,7 @@ import Left from "../assets/left.svg";
 import Right from "../assets/right.svg";
 import { handleFretOffsetAdjust } from "../helpers/handler";
 import { ArrowDirectionType, OffsetDirectionType } from "../helpers/types";
-import { useStateContext } from "./context";
+import { useFretboardContext, useStateContext } from "./context";
 
 function Arrow({
     direction,
@@ -11,10 +11,10 @@ function Arrow({
     direction: ArrowDirectionType;
     className?: string;
 }) {
-    // non-lefty orientation
-    const offsetDirection: OffsetDirectionType =
-        direction === "left" ? "down" : "up";
     const stateContext = useStateContext();
+    const { lefty } = useFretboardContext();
+
+    const offsetDirection = getOffsetDirection(direction, lefty);
 
     return (
         <div
@@ -30,6 +30,16 @@ function Arrow({
             )}
         </div>
     );
+}
+
+function getOffsetDirection(
+    direction: ArrowDirectionType,
+    isLefty: boolean
+): OffsetDirectionType {
+    if (!isLefty) {
+        return direction === "left" ? "down" : "up";
+    }
+    return direction === "left" ? "up" : "down";
 }
 
 export default Arrow;
