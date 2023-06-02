@@ -21,11 +21,11 @@ function computeFingeredNotes(
                 }
                 return [null];
             })
-            .filter((x) => x !== null)
+            .filter((noteGroup) => noteGroup !== null)
     );
 
     const chordNames = noteNames.map((noteGroup) =>
-        detect(noteGroup, { assumePerfectFifth: true })
+        detect(noteGroup.reverse(), { assumePerfectFifth: true })
     );
 
     return {
