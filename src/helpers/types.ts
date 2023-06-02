@@ -8,3 +8,8 @@ export type Context = {
 export type ArrowDirection = "left" | "right";
 
 export type OffsetDirection = "up" | "down";
+
+export type FingeredNotes = {
+    noteNames: string[][];
+    chordNames: string[][];
+};
