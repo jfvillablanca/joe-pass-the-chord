@@ -7,12 +7,12 @@ import { Context, OffsetDirection } from "./helpers/types";
 const [UPPER_FRET_LIMIT, LOWER_FRET_LIMIT] = [22, 0];
 
 function App() {
-    const [strings, setStrings] = useState([0, 0, 0, 0, 0, 0]);
-    const [fretOffset, setFretOffset] = useState(0);
-
     const tuning = standard;
     const fretsDisplayed = 4;
     const adjustUpperFretLimit = UPPER_FRET_LIMIT - fretsDisplayed + 1;
+
+    const [strings, setStrings] = useState([-1, -1, -1, -1, -1, -1]);
+    const [fretOffset, setFretOffset] = useState(0);
     const frets = { from: fretOffset, amount: fretsDisplayed - 1 };
 
     const handleFretOffsetAdjust = (offsetDirection: OffsetDirection) => {
