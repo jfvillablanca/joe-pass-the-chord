@@ -46,7 +46,9 @@ function App() {
                 direction={"left"}
                 handleFretOffsetAdjust={handleFretOffsetAdjust}
             />
-            <Fretboard className='col-span-3' context={context} />
+            <div className='col-span-3 flex flex-col justify-center'>
+                <Fretboard context={context} />
+            </div>
             <Arrow
                 className='col-span-1'
                 direction={"right"}
