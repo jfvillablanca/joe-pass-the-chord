@@ -4,7 +4,7 @@ import Arrow from "./components/Arrow";
 import { FretboardContext, StateContext } from "./components/context";
 import Display from "./components/Display";
 import Fretboard from "./components/Fretboard";
-import { DISPLAYED_FRETS } from "./helpers/compute";
+import { DISPLAYED_FRETS } from "./helpers/const_and_fn";
 import { handleFretOffsetAdjust } from "./helpers/handler";
 import { FretboardContextType, StateContextType } from "./helpers/types";
 

@@ -1,4 +1,4 @@
-import { computeFingeredNotes } from "../helpers/compute";
+import { computeFingeredNotes } from "../helpers/const_and_fn";
 import { useFretboardContext, useStateContext } from "./context";
 
 function Display() {

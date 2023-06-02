@@ -1,4 +1,4 @@
-import { DISPLAYED_FRETS, LOWER_FRET_LIMIT, UPPER_FRET_LIMIT } from "./compute";
+import { DISPLAYED_FRETS, LOWER_FRET_LIMIT, UPPER_FRET_LIMIT } from "./const_and_fn";
 import { OffsetDirectionType, StateContextType } from "./types";
 
 const adjustUpperFretLimit = UPPER_FRET_LIMIT - DISPLAYED_FRETS + 1;
