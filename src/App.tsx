@@ -37,7 +37,7 @@ function App() {
         strings,
         setStrings,
         frets,
-        handleFretOffsetAdjust,
+        lefty: false,
     };
 
     return (

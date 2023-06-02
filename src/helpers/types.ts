@@ -2,7 +2,7 @@ export type Context = {
     strings: number[];
     setStrings: React.Dispatch<React.SetStateAction<number[]>>;
     frets: { from: number; amount: number };
-    handleFretOffsetAdjust: (offsetDirection: OffsetDirection) => void;
+    lefty: boolean;
 };
 
 export type ArrowDirection = "left" | "right";

@@ -11,8 +11,8 @@ function Arrow({
     className?: string;
     handleFretOffsetAdjust: (offsetDirection: OffsetDirection) => void;
 }) {
-    // Lefty orientation
-    const offsetDirection = direction === "left" ? "up" : "down";
+    // non-lefty orientation
+    const offsetDirection = direction === "left" ? "down" : "up";
 
     return (
         <div
