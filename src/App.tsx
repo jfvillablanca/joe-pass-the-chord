@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Arrow from "./components/Arrow";
 import Fretboard from "./components/Fretboard";
 import { Context, OffsetDirection } from "./helpers/types";
@@ -28,10 +28,6 @@ function App() {
                 break;
         }
     };
-
-    useEffect(() => {
-        console.log(fretOffset);
-    }, [fretOffset]);
 
     const context: Context = {
         strings,
