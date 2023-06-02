@@ -9,14 +9,19 @@ function computeFingeredNotes(
 ): FingeredNotes {
     const noteNames: string[][] = unzip(
         strings
-            .filter((fret) => fret !== -1)
             .map((fret, string) => {
-                const { name: nameFlat } = get(fromMidi(tuning[string] + fret));
-                const { name: nameSharp } = get(
-                    fromMidiSharps(tuning[string] + fret)
-                );
-                return [nameFlat, nameSharp];
+                if (fret !== -1) {
+                    const { name: nameFlat } = get(
+                        fromMidi(tuning[string] + fret)
+                    );
+                    const { name: nameSharp } = get(
+                        fromMidiSharps(tuning[string] + fret)
+                    );
+                    return [nameFlat, nameSharp];
+                }
+                return [null];
             })
+            .filter((x) => x !== null)
     );
 
     const chordNames = noteNames.map((noteGroup) =>
