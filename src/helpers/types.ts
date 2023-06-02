@@ -1,4 +1,4 @@
-export type Context = {
+export type FretboardContextType = {
     tuning: number[];
     frets: { from: number; amount: number };
     lefty: boolean;

@@ -1,15 +1,8 @@
 import Guitar, { getRenderFingerSpn } from "react-guitar";
-import { Context } from "../helpers/types";
-import { useStateContext } from "./context";
+import { useFretboardContext, useStateContext } from "./context";
 
-function Fretboard({
-    context,
-    className: classFromApp = "",
-}: {
-    context: Context;
-    className?: string;
-}) {
-    const { frets, tuning, lefty } = context;
+function Fretboard({ className: classFromApp = "" }: { className?: string }) {
+    const { frets, tuning, lefty } = useFretboardContext();
     const { strings, setStrings } = useStateContext();
     return (
         <Guitar
