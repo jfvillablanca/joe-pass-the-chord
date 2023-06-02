@@ -14,16 +14,22 @@ const handleFretOffsetAdjust = ({
     stateContext: StateContextType;
     offsetDirection: OffsetDirectionType;
 }) => {
-    const { fretOffset, setFretOffset } = stateContext;
+    const { setStrings, fretOffset, setFretOffset } = stateContext;
     const [raisedFret, loweredFret] = [fretOffset + 1, fretOffset - 1];
     switch (offsetDirection) {
         case "up":
             if (raisedFret <= adjustUpperFretLimit) {
+                setStrings((prevState) =>
+                    prevState.map((string) => (string !== -1 ? string + 1 : -1))
+                );
                 setFretOffset(() => raisedFret);
             }
             break;
         case "down":
             if (loweredFret >= LOWER_FRET_LIMIT) {
+                setStrings((prevState) =>
+                    prevState.map((string) => (string !== -1 ? string - 1 : -1))
+                );
                 setFretOffset(() => loweredFret);
             }
             break;
