@@ -17,7 +17,7 @@ function computeFingeredNotes(
                     const { name: nameSharp } = get(
                         fromMidiSharps(tuning[string] + fret)
                     );
-                    return [nameFlat, nameSharp];
+                    return [nameSharp, nameFlat];
                 }
                 return [null];
             })
