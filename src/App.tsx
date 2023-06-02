@@ -32,7 +32,7 @@ function App() {
                     data-theme='light'
                 >
                     <Arrow className='col-span-1' direction={"left"} />
-                    <div className='col-span-3 flex flex-col justify-center'>
+                    <div className='col-span-3 flex flex-col justify-center gap-5'>
                         <Fretboard />
                         <Display />
                     </div>
