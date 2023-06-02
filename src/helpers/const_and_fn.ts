@@ -35,7 +35,7 @@ function computeFingeredNotes(
 }
 
 const [UPPER_FRET_LIMIT, LOWER_FRET_LIMIT] = [22, 0];
-const DISPLAYED_FRETS = 4;
+const DISPLAYED_FRETS = 5;
 
 export {
     UPPER_FRET_LIMIT,
