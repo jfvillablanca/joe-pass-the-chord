@@ -15,7 +15,9 @@ function computeFingeredNotes(strings: number[], tuning: number[]) {
             })
     );
 
-    const chordNames = noteNames.map((noteGroup) => detect(noteGroup));
+    const chordNames = noteNames.map((noteGroup) =>
+        detect(noteGroup, { assumePerfectFifth: true })
+    );
 
     return {
         noteNames,
