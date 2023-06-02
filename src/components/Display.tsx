@@ -6,6 +6,7 @@ function Display() {
     const { tuning } = useFretboardContext();
     const { chordNames } = computeFingeredNotes(strings, tuning);
 
+    const frettedStrings = strings.filter((x) => x !== -1);
     const uniqueChordNames = [...new Set(chordNames.flat())];
     const chordElements = uniqueChordNames.map((chord, key) => (
         <div
@@ -18,7 +19,13 @@ function Display() {
 
     return (
         <>
-            {chordElements.length === 0 ? (
+            {frettedStrings.length === 0 ? (
+                <p className='font-bold text-xl uppercase'>
+                    Start selecting notes on the fretboard
+                </p>
+            ) : frettedStrings.length < 3 ? (
+                <p className='font-bold text-xl uppercase'>Keep on selecting</p>
+            ) : chordElements.length === 0 ? (
                 <p className='font-bold text-xl uppercase'>
                     No inferred chords
                 </p>
