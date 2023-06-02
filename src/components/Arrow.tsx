@@ -1,3 +1,4 @@
+import { twMerge } from "tailwind-merge";
 import Left from "../assets/left.svg";
 import Right from "../assets/right.svg";
 import { handleFretOffsetAdjust } from "../helpers/handler";
@@ -15,18 +16,23 @@ function Arrow({
     const { lefty } = useFretboardContext();
 
     const offsetDirection = getOffsetDirection(direction, lefty);
+    const cssHeight = "h-10";
 
     return (
         <div
-            className={`${classFromApp} btn place-self-center`}
+            className={twMerge(
+                cssHeight,
+                `btn place-self-center`,
+                classFromApp
+            )}
             onClick={() =>
                 handleFretOffsetAdjust({ stateContext, offsetDirection })
             }
         >
             {direction === "left" ? (
-                <img src={Left} alt='Left' />
+                <img src={Left} alt='Left' className={twMerge(cssHeight)} />
             ) : (
-                <img src={Right} alt='Right' />
+                <img src={Right} alt='Right' className={twMerge(cssHeight)} />
             )}
         </div>
     );
