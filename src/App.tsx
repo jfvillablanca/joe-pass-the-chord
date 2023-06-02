@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { standard } from "react-guitar-tunings";
 import Arrow from "./components/Arrow";
+import Display from "./components/Display";
 import Fretboard from "./components/Fretboard";
 import { Context, OffsetDirection } from "./helpers/types";
 
 const [UPPER_FRET_LIMIT, LOWER_FRET_LIMIT] = [22, 0];
+import { computeFingeredNotes } from "./helpers/compute";
 
 function App() {
     const tuning = standard;
@@ -48,6 +50,7 @@ function App() {
             />
             <div className='col-span-3 flex flex-col justify-center'>
                 <Fretboard context={context} />
+                <Display noteInfo={computeFingeredNotes(strings, tuning)} />
             </div>
             <Arrow
                 className='col-span-1'
