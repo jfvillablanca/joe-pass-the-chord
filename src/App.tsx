@@ -3,35 +3,16 @@ import { standard } from "react-guitar-tunings";
 import Arrow from "./components/Arrow";
 import Display from "./components/Display";
 import Fretboard from "./components/Fretboard";
-import { Context, OffsetDirection } from "./helpers/types";
-
-const [UPPER_FRET_LIMIT, LOWER_FRET_LIMIT] = [22, 0];
-import { computeFingeredNotes } from "./helpers/compute";
+import { computeFingeredNotes, DISPLAYED_FRETS } from "./helpers/compute";
+import { handleFretOffsetAdjust } from "./helpers/handler";
+import { Context } from "./helpers/types";
 
 function App() {
     const tuning = standard;
-    const fretsDisplayed = 4;
-    const adjustUpperFretLimit = UPPER_FRET_LIMIT - fretsDisplayed + 1;
 
     const [strings, setStrings] = useState([-1, -1, -1, -1, -1, -1]);
     const [fretOffset, setFretOffset] = useState(0);
-    const frets = { from: fretOffset, amount: fretsDisplayed - 1 };
-
-    const handleFretOffsetAdjust = (offsetDirection: OffsetDirection) => {
-        const [raisedFret, loweredFret] = [fretOffset + 1, fretOffset - 1];
-        switch (offsetDirection) {
-            case "up":
-                if (raisedFret <= adjustUpperFretLimit) {
-                    setFretOffset(() => raisedFret);
-                }
-                break;
-            case "down":
-                if (loweredFret >= LOWER_FRET_LIMIT) {
-                    setFretOffset(() => loweredFret);
-                }
-                break;
-        }
-    };
+    const frets = { from: fretOffset, amount: DISPLAYED_FRETS - 1 };
 
     const context: Context = {
         strings,
@@ -39,6 +20,8 @@ function App() {
         frets,
         tuning,
         lefty: false,
+        fretOffset,
+        setFretOffset,
     };
 
     return (
@@ -46,7 +29,7 @@ function App() {
             <Arrow
                 className='col-span-1'
                 direction={"left"}
-                handleFretOffsetAdjust={handleFretOffsetAdjust}
+                handleFretOffsetAdjust={handleFretOffsetAdjust(context)}
             />
             <div className='col-span-3 flex flex-col justify-center'>
                 <Fretboard context={context} />
@@ -55,7 +38,7 @@ function App() {
             <Arrow
                 className='col-span-1'
                 direction={"right"}
-                handleFretOffsetAdjust={handleFretOffsetAdjust}
+                handleFretOffsetAdjust={handleFretOffsetAdjust(context)}
             />
         </main>
     );

@@ -4,6 +4,8 @@ export type Context = {
     setStrings: React.Dispatch<React.SetStateAction<number[]>>;
     frets: { from: number; amount: number };
     lefty: boolean;
+    fretOffset: number;
+    setFretOffset: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export type ArrowDirection = "left" | "right";
