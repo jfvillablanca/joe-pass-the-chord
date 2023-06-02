@@ -1,23 +1,27 @@
 import Left from "../assets/left.svg";
 import Right from "../assets/right.svg";
+import { handleFretOffsetAdjust } from "../helpers/handler";
 import { ArrowDirectionType, OffsetDirectionType } from "../helpers/types";
+import { useStateContext } from "./context";
 
 function Arrow({
     direction,
     className: classFromApp = "",
-    handleFretOffsetAdjust,
 }: {
     direction: ArrowDirectionType;
     className?: string;
-    handleFretOffsetAdjust: (offsetDirection: OffsetDirectionType) => void;
 }) {
     // non-lefty orientation
-    const offsetDirection = direction === "left" ? "down" : "up";
+    const offsetDirection: OffsetDirectionType =
+        direction === "left" ? "down" : "up";
+    const stateContext = useStateContext();
 
     return (
         <div
             className={`${classFromApp} btn place-self-center`}
-            onClick={() => handleFretOffsetAdjust(offsetDirection)}
+            onClick={() =>
+                handleFretOffsetAdjust({ stateContext, offsetDirection })
+            }
         >
             {direction === "left" ? (
                 <img src={Left} alt='Left' />

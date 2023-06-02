@@ -5,7 +5,6 @@ import { FretboardContext, StateContext } from "./components/context";
 import Display from "./components/Display";
 import Fretboard from "./components/Fretboard";
 import { DISPLAYED_FRETS } from "./helpers/const_and_fn";
-import { handleFretOffsetAdjust } from "./helpers/handler";
 import { FretboardContextType, StateContextType } from "./helpers/types";
 
 function App() {
@@ -32,24 +31,12 @@ function App() {
                     className='grid grid-cols-5 h-screen w-screen'
                     data-theme='light'
                 >
-                    <Arrow
-                        className='col-span-1'
-                        direction={"left"}
-                        handleFretOffsetAdjust={handleFretOffsetAdjust(
-                            stateContext
-                        )}
-                    />
+                    <Arrow className='col-span-1' direction={"left"} />
                     <div className='col-span-3 flex flex-col justify-center'>
                         <Fretboard />
                         <Display />
                     </div>
-                    <Arrow
-                        className='col-span-1'
-                        direction={"right"}
-                        handleFretOffsetAdjust={handleFretOffsetAdjust(
-                            stateContext
-                        )}
-                    />
+                    <Arrow className='col-span-1' direction={"right"} />
                 </main>
             </StateContext.Provider>
         </FretboardContext.Provider>
