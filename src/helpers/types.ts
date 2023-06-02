@@ -1,9 +1,12 @@
 export type Context = {
     tuning: number[];
-    strings: number[];
-    setStrings: React.Dispatch<React.SetStateAction<number[]>>;
     frets: { from: number; amount: number };
     lefty: boolean;
+};
+
+export type StateContextType = {
+    strings: number[];
+    setStrings: React.Dispatch<React.SetStateAction<number[]>>;
     fretOffset: number;
     setFretOffset: React.Dispatch<React.SetStateAction<number>>;
 };

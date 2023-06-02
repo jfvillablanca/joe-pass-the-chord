@@ -1,11 +1,11 @@
 import { DISPLAYED_FRETS, LOWER_FRET_LIMIT, UPPER_FRET_LIMIT } from "./compute";
-import { Context, OffsetDirection } from "./types";
+import { OffsetDirection, StateContextType } from "./types";
 
 const adjustUpperFretLimit = UPPER_FRET_LIMIT - DISPLAYED_FRETS + 1;
 
 const handleFretOffsetAdjust =
-    (context: Context) => (offsetDirection: OffsetDirection) => {
-        const { fretOffset, setFretOffset } = context;
+    (stateContext: StateContextType) => (offsetDirection: OffsetDirection) => {
+        const { fretOffset, setFretOffset } = stateContext;
         const [raisedFret, loweredFret] = [fretOffset + 1, fretOffset - 1];
         switch (offsetDirection) {
             case "up":

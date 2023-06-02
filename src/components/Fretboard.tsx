@@ -1,5 +1,6 @@
 import Guitar, { getRenderFingerSpn } from "react-guitar";
 import { Context } from "../helpers/types";
+import { useStateContext } from "./context";
 
 function Fretboard({
     context,
@@ -8,7 +9,8 @@ function Fretboard({
     context: Context;
     className?: string;
 }) {
-    const { strings, setStrings, frets, tuning, lefty } = context;
+    const { frets, tuning, lefty } = context;
+    const { strings, setStrings } = useStateContext();
     return (
         <Guitar
             className={`${classFromApp} place-self-center`}
