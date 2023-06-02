@@ -1,5 +1,4 @@
 import Guitar, { getRenderFingerSpn } from "react-guitar";
-import { standard } from "react-guitar-tunings";
 import { Context } from "../helpers/types";
 
 function Fretboard({
@@ -9,15 +8,15 @@ function Fretboard({
     context: Context;
     className?: string;
 }) {
-    const { strings, setStrings, frets } = context;
+    const { strings, setStrings, frets, tuning, lefty } = context;
     return (
         <Guitar
             className={`${classFromApp} place-self-center`}
             strings={strings}
             onChange={setStrings}
             frets={frets}
-            lefty={true}
-            renderFinger={getRenderFingerSpn(standard)}
+            lefty={lefty}
+            renderFinger={getRenderFingerSpn(tuning)}
         />
     );
 }

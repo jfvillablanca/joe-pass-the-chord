@@ -1,4 +1,5 @@
 export type Context = {
+    tuning: number[];
     strings: number[];
     setStrings: React.Dispatch<React.SetStateAction<number[]>>;
     frets: { from: number; amount: number };

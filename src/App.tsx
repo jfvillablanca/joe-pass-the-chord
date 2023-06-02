@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { standard } from "react-guitar-tunings";
 import Arrow from "./components/Arrow";
 import Fretboard from "./components/Fretboard";
 import { Context, OffsetDirection } from "./helpers/types";
@@ -9,6 +10,7 @@ function App() {
     const [strings, setStrings] = useState([0, 0, 0, 0, 0, 0]);
     const [fretOffset, setFretOffset] = useState(0);
 
+    const tuning = standard;
     const fretsDisplayed = 4;
     const adjustUpperFretLimit = UPPER_FRET_LIMIT - fretsDisplayed + 1;
     const frets = { from: fretOffset, amount: fretsDisplayed - 1 };
@@ -33,6 +35,7 @@ function App() {
         strings,
         setStrings,
         frets,
+        tuning,
         lefty: false,
     };
 
